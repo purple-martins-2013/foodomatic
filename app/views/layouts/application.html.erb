@@ -22,46 +22,15 @@
 
   <body>
 
-  <nav class="top-bar">
-  <ul class="title-area">
-    <li class="name">
-      <h1><a href="#">GrocerPlease!</a></h1>
-  </ul>
+    <%= render 'layouts/top_nav' %>
 
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="divider"></li>
-      <li class="has-form">
-        <form>
-          <div class="row collapse">
-            <div class="small-8 columns">
-              <input type="text">
-            </div>
-            <div class="small-4 columns">
-              <a href="#" class="button">Search</a>
-            </div>
-          </div>
-        </form>
-      </li>
+    <div class='row'>
+      <%= display_flash_messages %>
+    </div>
 
-      <li class="divider"></li>
-      <li class="active"><a href="#">BASKET</a></li>
-
-      <li class="divider hide-for-small"></li>
-      <li class="has-dropdown"><a href="#">Account</a>
-        <ul class="dropdown">
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Log Out</a></li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-</nav>
-
-    <%= display_flash_messages %>
-
-    <%= yield %>
+    <div class='row'>
+      <%= yield %>
+    </div>
 
   </body>
 </html>
