@@ -10,5 +10,19 @@
  *
  *= require_self
  *= require foundation_and_overrides
+ *= require jquery.ui.all
  *= require_tree .
  */
+
+.index-title {
+  padding-left: 20px;
+}
+
+#empty {
+  border-style: solid;
+  border-width: 1px;
+  width: 220px;
+  height: 275px;
+  padding: 0;
+  margin: 5px;
+}

@@ -13,15 +13,51 @@
   	<!-- Set the viewport width to device width for mobile -->
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
-
-  	<%= stylesheet_link_tag    "application" %>
+  	<title><%= content_for?(:title) ? yield(:title) : "GrocerPlease!" %></title>
+    <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
-  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
+
+  <nav class="top-bar">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">GrocerPlease!</a></h1>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="divider"></li>
+      <li class="has-form">
+        <form>
+          <div class="row collapse">
+            <div class="small-8 columns">
+              <input type="text">
+            </div>
+            <div class="small-4 columns">
+              <a href="#" class="button">Search</a>
+            </div>
+          </div>
+        </form>
+      </li>
+
+      <li class="divider"></li>
+      <li class="active"><a href="#">BASKET</a></li>
+
+      <li class="divider hide-for-small"></li>
+      <li class="has-dropdown"><a href="#">Account</a>
+        <ul class="dropdown">
+          <li><a href="#">Settings</a></li>
+          <li><a href="#">Log Out</a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</nav>
 
     <%= display_flash_messages %>
 
