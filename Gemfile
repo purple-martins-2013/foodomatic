@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
+gem 'pg'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -10,7 +12,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'shoulda'
 end
-
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
