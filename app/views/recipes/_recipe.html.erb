@@ -2,6 +2,6 @@
   <div class="panel">
     <%= image_tag recipe.image_url %>
     <a href="#" class="tiny button">Get Now!</a>
-    <a href="#" class="tiny button queue-it">Add to Queue</a>
+    <%= button_to "Add to Queue", queued_recipes_path(:user_id => current_user.id, :recipe_id => recipe.id), class: "tiny button queue-it" %>
   </div>
 </div>
