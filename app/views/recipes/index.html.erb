@@ -1,18 +1,7 @@
 <h3 class="index-title"> Featured Recipes </h3>
 
 <div class="row">
-
-    <% @recipes.each do |recipe| %>
-      <div class="draggable large-3 small-6 columns">
-        <div class="panel">
-          <%= image_tag recipe.image_url %>
-          <a href="#" class="tiny button">Get Now!</a>
-          <a href="#" class="tiny button">Add to Queue</a>
-        </div>
-      </div>
-    <% end %>
-
-
+  <%= render partial: 'recipe', collection: @recipes %>
 </div>
 
 <hr>
