@@ -5,6 +5,6 @@ FactoryGirl.define do
     sequence :title do
       |n| "Steak #{n}"
     end
-    image_url 'http://www.neontommy.com/sites/default/files/uploads/moretonfigsteak.JPG'
+    image_url 'http://placehold.it/500x500&text=Food Porn'
   end
 end
