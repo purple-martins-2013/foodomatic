@@ -1,5 +1,13 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  before do
+    @user = FactoryGirl.create :user
+  end
+
+  subject { @user }
+
+  it { should have_many(:recipes).through(:queued_recipes) }
+
 end
