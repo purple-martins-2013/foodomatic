@@ -11,7 +11,9 @@
 <div id="recipe-<%= recipe.id %>-modal" class="reveal-modal medium">
   <h2><%= recipe.title %></h2>
   <p class="lead"></p>
-  <p></p>
+  <ul>
+    <%= render partial: 'ingredients/ingredient', collection: recipe.ingredients %>
+  </ul>
   <a href="#" class="tiny button">Add to Basket!</a>
   <a href="#" class="tiny button queue-it">Add to Queue</a>
   <a class="close-reveal-modal">&#215;</a>
