@@ -6,7 +6,7 @@ FactoryGirl.define do
   end
   factory :product do
     name
-    unit_type "kilos"
+    amount_type "kilos"
     price "9.99"
     min_amount 1
   end
