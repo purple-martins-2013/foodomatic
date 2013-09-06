@@ -24,9 +24,13 @@
 
     <%= render 'layouts/top_nav' %>
 
-    <%= display_flash_messages %>
+    <div class='row'>
+      <%= display_flash_messages %>
+    </div>
 
-    <%= yield %>
+    <div class='row'>
+      <%= yield %>
+    </div>
 
   </body>
 </html>

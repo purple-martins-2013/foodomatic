@@ -11,3 +11,5 @@ recipe = { 'Ketchup, Mustard Dog' => 'http://i-cdn.apartmenttherapy.com/ol-image
            'Adorable' => 'http://wineormous.com/wp-content/uploads/2012/12/WINEormous-at-The-French-Laundry-in-Yountville-CA.jpg'}
 
 recipe.each { |title, image| Recipe.create(title: title, image_url: image) }
+
+FactoryGirl.create(:user)
