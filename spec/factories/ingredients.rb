@@ -1,8 +1,10 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :ingredient do
-    required_amount 1
+
+    sequence :required_amount do |n|
+      n
+    end
+
     recipe
     product
   end
