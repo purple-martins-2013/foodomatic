@@ -1,7 +1,18 @@
-<div class="available-recipe recipe large-3 small-6 columns">
-  <div class="panel">
-    <%= image_tag recipe.image_url %>
-    <a href="#" class="tiny button">Get Now!</a>
-    <a href="#" class="tiny button queue-it">Add to Queue</a>
+<a href="#" data-reveal-id="recipe-<%= recipe.id %>-modal">
+  <div class="available-recipe recipe large-3 small-6 columns">
+    <div class="panel">
+      <%= image_tag recipe.image_url %>
+      <a href="#" class="tiny button">Add to Basket!</a>
+      <a href="#" class="tiny button queue-it">Add to Queue</a>
+    </div>
   </div>
+</a>
+
+<div id="recipe-<%= recipe.id %>-modal" class="reveal-modal medium">
+  <h2><%= recipe.title %></h2>
+  <p class="lead"></p>
+  <p></p>
+  <a href="#" class="tiny button">Add to Basket!</a>
+  <a href="#" class="tiny button queue-it">Add to Queue</a>
+  <a class="close-reveal-modal">&#215;</a>
 </div>
