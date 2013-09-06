@@ -31,5 +31,6 @@ describe Recipe do
   it { should respond_to :title }
   it { should respond_to :image_url }
   it { should have_many(:users).through(:queued_recipes) }
+  it { should have_many(:products).through(:ingredients) }
 
 end

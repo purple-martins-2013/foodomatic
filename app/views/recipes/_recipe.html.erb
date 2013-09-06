@@ -1,7 +1,20 @@
-<div class="available-recipe recipe large-3 small-6 columns">
-  <div class="panel">
-    <%= image_tag recipe.image_url %>
-    <a href="#" class="tiny button">Get Now!</a>
-    <%= button_to "Add to Queue", queued_recipes_path(:user_id => current_user.id, :recipe_id => recipe.id), class: "tiny button queue-it" %>
+<a href="#" data-reveal-id="recipe-<%= recipe.id %>-modal">
+  <div class="available-recipe recipe large-3 small-6 columns">
+    <div class="panel">
+      <%= image_tag recipe.image_url %>
+      <a href="#" class="tiny button">Add to Basket!</a>
+      <%= button_to "Add to Queue", queued_recipes_path(:user_id => current_user.id, :recipe_id => recipe.id), class: "tiny button queue-it" %>
+    </div>
   </div>
+</a>
+
+<div id="recipe-<%= recipe.id %>-modal" class="reveal-modal medium">
+  <h2><%= recipe.title %></h2>
+  <p class="lead"></p>
+  <ul>
+    <%= render partial: 'ingredients/ingredient', collection: recipe.ingredients %>
+  </ul>
+  <a href="#" class="tiny button">Add to Basket!</a>
+  <a href="#" class="tiny button queue-it">Add to Queue</a>
+  <a class="close-reveal-modal">&#215;</a>
 </div>
