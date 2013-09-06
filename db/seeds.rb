@@ -12,4 +12,7 @@ recipe = { 'Ketchup, Mustard Dog' => 'http://i-cdn.apartmenttherapy.com/ol-image
 
 recipe.each { |title, image| Recipe.create(title: title, image_url: image) }
 
-FactoryGirl.create(:user)
+10.times do
+  FactoryGirl.create(:user)
+  FactoryGirl.create(:product)
+end

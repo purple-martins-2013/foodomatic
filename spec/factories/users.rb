@@ -1,14 +1,14 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  sequence :email do |n| 
+  sequence :email do |n|
     "email#{n}@factory.com"
-  end 
+  end
 
   factory :user do
-    email 
+    email
     password              { "password" }
     password_confirmation { "password" }
-  end 
+  end
 
 end
