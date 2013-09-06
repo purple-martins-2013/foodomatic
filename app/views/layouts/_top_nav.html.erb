@@ -1,7 +1,9 @@
 <nav class="top-bar">
+
   <ul class="title-area">
     <li class="name">
-      <h1><a href="#">GrocerPlease!</a></h1>
+    <h1><%= link_to 'GrocerPlease!', root_path %></h1>
+    </li>
   </ul>
 
   <section class="top-bar-section">
@@ -25,12 +27,20 @@
       <li class="active"><a href="#">BASKET</a></li>
 
       <li class="divider hide-for-small"></li>
-      <li class="has-dropdown"><a href="#">Account</a>
-        <ul class="dropdown">
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Log Out</a></li>
-        </ul>
-      </li>
+
+      <% if user_signed_in? %>
+        <li class="has-dropdown"><a href="#">Account</a>
+          <ul class="dropdown">
+            <li><a href="#">Settings</a></li>
+            <li><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+      <% else %>
+        <li><%= link_to 'Sign In', new_user_session_path %></li>
+        <li class="divider hide-for-small"></li>
+        <li><%= link_to 'Sign Up', new_user_registration_path  %></li>
+      <% end %>
+
     </ul>
   </section>
 </nav>
