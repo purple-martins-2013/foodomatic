@@ -15,7 +15,7 @@ describe QueuedRecipe do
     let(:user) { User.create }
     let(:qr) { QueuedRecipe.create(user: user) }
 
-    it "should assign a priority number before saving" do
+    it "should assign a priority number before creating" do
       expect(qr.priority).to eq user.next_priority
     end
   end
