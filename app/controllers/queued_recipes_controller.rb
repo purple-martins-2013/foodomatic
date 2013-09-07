@@ -3,7 +3,7 @@ class QueuedRecipesController < ApplicationController
     QueuedRecipe.create(
       user: current_user,
       recipe_id: params[:recipe_id])
-    queued_recipes_count = QueuedRecipe.where(user_id: current_user).count
+    queued_recipes_count = current_user.queued_recipes.count
     render json: { queued_recipes_count: queued_recipes_count }.to_json
   end
 
