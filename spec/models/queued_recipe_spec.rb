@@ -11,12 +11,12 @@ describe QueuedRecipe do
   it { should belong_to :user }
   it { should belong_to :recipe }
 
-  describe "set priority" do
+  describe "assign position" do
     let(:user) { User.create }
     let(:qr) { QueuedRecipe.create(user: user) }
 
-    it "should assign a priority number before saving" do
-      expect(qr.priority).to eq user.next_priority
+    it "should assign a position before creating" do
+      expect(qr.position).to eq user.last_position
     end
   end
 end
