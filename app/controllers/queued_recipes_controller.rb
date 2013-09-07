@@ -3,7 +3,7 @@ class QueuedRecipesController < ApplicationController
     QueuedRecipe.create(
       user: current_user, 
       recipe_id: params[:recipe_id])
-    redirect_to recipes_path
+    render json: { queued_recipes_count: QueuedRecipe.count }.to_json
   end
 
   def index
@@ -17,7 +17,7 @@ class QueuedRecipesController < ApplicationController
       qr.position = params['qr'].index(qr.id.to_s) + 1
       qr.save
     end
-    
+
     render nothing: true
   end
 end

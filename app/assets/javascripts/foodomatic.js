@@ -23,11 +23,22 @@ $(document).ready(function() {
 
   $('.add-to-queue').on('click', function(e) {
     e.preventDefault();
-    $('#queue-link').effect('bounce', {times: 3}, "slow").badger('+5');
+
+    var request = $.ajax({
+      url: $(this).attr('href'),
+      type: 'POST'
+    });
+
+    request.done(function(data){
+      var badge = (data.queued_recipes_count).toString();
+      $('#queue-link').effect('bounce', {times: 3}, "slow").badger(badge);
+    });
+
   });
 
   $('.add-to-basket').on('click', function(e) {
     e.preventDefault();
     $('#basket-link').effect('bounce', {times: 3}, "slow").badger('+5');
   });
+
 });
