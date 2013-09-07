@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require jquery.classywiggle.js
+//= require jquery.badger.js
 //= require foundation
 //= require_tree .
 
