@@ -2,5 +2,7 @@
 
 FactoryGirl.define do
   factory :basketed_recipe do
+    user
+    recipe
   end
 end
