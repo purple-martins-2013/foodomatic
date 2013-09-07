@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   $('.sortable').sortable({
     axis: 'y',
     dropOnEmpty: false,
@@ -19,9 +20,14 @@ $(document).ready(function() {
       })
     }
   });
-  
-  $('.queue-it').on('click', function(e) {
+
+  $('.add-to-queue').on('click', function(e) {
     e.preventDefault();
-    $('#queue').effect('bounce', {times: 3}, "slow").badger('+5');
+    $('#queue-link').effect('bounce', {times: 3}, "slow").badger('+5');
+  });
+
+  $('.add-to-basket').on('click', function(e) {
+    e.preventDefault();
+    $('#basket-link').effect('bounce', {times: 3}, "slow").badger('+5');
   });
 });
