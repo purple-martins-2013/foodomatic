@@ -2,9 +2,11 @@ class QueuedRecipe < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipe
 
-  before_create :set_priority
+  acts_as_list
 
-  def set_priority
-    self.priority = self.user.next_priority
+  before_create :assign_position
+
+  def assign_position
+    self.position = self.user.last_position
   end
 end

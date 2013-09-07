@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :queued_recipes
   has_many :recipes, through: :queued_recipes
 
-  def next_priority
+  def last_position
     queued_recipes.count + 1
   end
 end
