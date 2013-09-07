@@ -1,4 +1,21 @@
+<p>
+  <a href="#", data-reveal-id="checkout-modal">Checkout
+</p>
+
 <div class="row">
   <%= render partial: 'recipes/recipe', collection: @basket %>
 </div>
 
+<!-- Checkout modal -->
+<div id="checkout-modal" class="reveal-modal medium">
+  <h2>Your Grocery List</h2>
+  <p class="lead"></p>
+  <ul>
+    <% @basket.each do |recipe| %>
+      <% recipe.ingredients.each do |ingredient| %>
+        <li><%= ingredient.required_amount %> <%= ingredient.product.name %></li>
+      <% end %>
+    <% end %>
+  </ul>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
