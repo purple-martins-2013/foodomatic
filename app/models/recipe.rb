@@ -8,6 +8,8 @@ class Recipe < ActiveRecord::Base
 
   has_many :queued_recipes
   has_many :users, through: :queued_recipes
+  has_many :basketed_recipes
+
   has_many :ingredients
   has_many :products, through: :ingredients
 end
