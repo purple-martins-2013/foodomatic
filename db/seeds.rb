@@ -1,2 +1,3 @@
-5.times { FactoryGirl.create(:user) }
+5.times { FactoryGirl.create(:basketed_recipe) }
+
 20.times { FactoryGirl.create(:ingredient) }

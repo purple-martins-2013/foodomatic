@@ -6,9 +6,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :queued_recipes
-  has_many :recipes, through: :queued_recipes
+  has_many :basketed_recipes
 
   def next_priority
     queued_recipes.count + 1
   end
+
+  def basket
+    # REFACTOR: there probably is a better way to do this
+    BasketedRecipe.includes(:recipe).where(user_id: self).map(&:recipe)
+  end
+
 end
