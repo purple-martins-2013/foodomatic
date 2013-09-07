@@ -11,4 +11,10 @@ class User < ActiveRecord::Base
   def next_priority
     queued_recipes.count + 1
   end
+
+  def basket
+    # REFACTOR: there probably is a better way to do this
+    BasketedRecipe.includes(:recipe).where(user_id: self).map(&:recipe)
+  end
+
 end
