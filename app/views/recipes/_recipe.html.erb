@@ -2,16 +2,15 @@
   <div class="available-recipe recipe large-3 small-6 columns">
     <div class="panel">
       <%= image_tag recipe.image_url %>
+
       <% if user_signed_in? %>
         <a href="#" class="tiny button add-to-basket">Add to Basket!</a>
-      <% else %>
-        <%= link_to "Add to Queue", "#", class: "tiny button", data: { 'reveal-id' => "not-logged-in-modal"} %>
-      <% end %>
-      <% if user_signed_in? %>
         <%= button_to "Add to Queue", queued_recipes_path(:user_id => current_user.id, :recipe_id => recipe.id), class: "tiny button add-to-queue" %>
       <% else %>
-        <%= link_to "Add to Queue", "#", class: "tiny button", data: { 'reveal-id' => "not-logged-in-modal"} %>
+        <%= link_to "Add to Basket", "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
+        <%= link_to "Add to Queue", "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
       <% end %>
+
     </div>
   </div>
 </a>
@@ -24,10 +23,5 @@
   </ul>
   <a href="#" class="tiny button add-to-basket">Add to Basket!</a>
   <a href="#" class="tiny button add-to-queue">Add to Queue</a>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
-
-<div id="not-logged-in-modal" class="reveal-modal small">
-  <h3>Get started today by creating an account or signing in!</h3>
   <a class="close-reveal-modal">&#215;</a>
 </div>

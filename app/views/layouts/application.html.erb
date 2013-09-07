@@ -24,7 +24,7 @@
 
     <%= render 'layouts/top_nav' %>
 
-    <% if user_signed_in? %>
+    <% unless user_signed_in? %>
       <%= render partial: 'layouts/sign_in_modal' %>
     <% end %>
 
