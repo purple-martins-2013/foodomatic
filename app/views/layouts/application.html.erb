@@ -24,6 +24,10 @@
 
     <%= render 'layouts/top_nav' %>
 
+    <% unless user_signed_in? %>
+      <%= render partial: 'layouts/sign_in_modal' %>
+    <% end %>
+
     <div class='row'>
       <%= display_flash_messages %>
     </div>
@@ -31,7 +35,7 @@
     <div class='row'>
       <%= yield %>
     </div>
-    
+
     <%= yield :javascript %>
   </body>
 </html>

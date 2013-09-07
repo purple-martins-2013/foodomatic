@@ -1,7 +1,6 @@
 <a href="#" data-reveal-id="recipe-<%= recipe.id %>-modal">
   <div class="available-recipe recipe large-3 small-6 columns">
     <div class="panel">
-
      <%= image_tag recipe.image_url %>
 
       <% if user_signed_in? %>
@@ -25,10 +24,5 @@
   </ul>
   <a href="#" class="tiny button add-to-basket">Add to Basket!</a>
   <a href="#" class="tiny button add-to-queue">Add to Queue</a>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
-
-<div id="not-logged-in-modal" class="reveal-modal small">
-  <h3>Get started today by creating an account or signing in!</h3>
   <a class="close-reveal-modal">&#215;</a>
 </div>
