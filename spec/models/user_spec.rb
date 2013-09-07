@@ -8,7 +8,7 @@ describe User do
 
   subject { @user }
 
-  it { should have_many(:recipes).through(:queued_recipes) }
+  it { should have_many(:queued_recipes) }
   it { should have_many(:basketed_recipes) }
-
 end
+

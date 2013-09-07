@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :queued_recipes
-  has_many :recipes, through: :queued_recipes
   has_many :basketed_recipes
 
   def next_priority
