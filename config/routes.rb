@@ -6,5 +6,7 @@ Foodomatic::Application.routes.draw do
     post :sort, on: :collection
   end
 
+  get "basket", to: 'basket#show'
+
   root 'recipes#index'
 end
