@@ -12,9 +12,15 @@ class User < ActiveRecord::Base
     queued_recipes.count + 1
   end
 
+  # REFACTOR: a basket object
+  # how do you make a non persisted object that belongs to the current user?
   def basket
     # REFACTOR: there probably is a better way to do this
-    BasketedRecipe.includes(:recipe).where(user_id: self).map(&:recipe)
+    BasketedRecipe.includes(:recipe).where(user_id: self.id).map(&:recipe)
+  end
+
+  def add_to_basket(recipe)
+    BasketedRecipe.create(user_id: self.id, recipe: recipe)
   end
 
   def total(basket)

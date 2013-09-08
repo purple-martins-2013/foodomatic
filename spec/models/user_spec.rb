@@ -46,5 +46,23 @@ describe User do
       end
     end
   end
+
+  describe "#add_to_basket" do
+
+    before do
+      @recipe = FactoryGirl.create :recipe
+    end
+
+    it "should add a recipe to the basket" do
+      expect {subject.add_to_basket(@recipe) }.to change {subject.basket.size}.by 1
+    end
+
+    it "adds the right recipe to the basket" do
+      subject.add_to_basket(@recipe)
+      expect(subject.basket).to include(@recipe)
+    end
+
+  end
+
 end
 
