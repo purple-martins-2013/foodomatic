@@ -23,11 +23,28 @@ describe User do
         @recipe = FactoryGirl.create :recipe
         FactoryGirl.create(:basketed_recipe, user: @user, recipe: @recipe)
       end
+
       it 'should return a list of Recipes (that are in the basket)' do
         expect(@user.basket).to eq [@recipe]
       end
     end
   end
 
+  describe "#total" do
+    let(:recipe) { FactoryGirl.create(:recipe_with_ingredients) }
+    let(:basket) { [recipe] }
+    let(:ingredient) { recipe.ingredients.first }
+    let(:product) { recipe.ingredients.first.product }
+
+    it "requires 1 argument" do
+      expect { @user.total }.to raise_error(ArgumentError)
+    end
+
+    context "when there is 1 recipe in the basket" do
+      it "calculates the total cost of the ingredients of the recipe in the basket" do
+        expect(@user.total(basket)).to eq ingredient.amount_to_buy * product.price
+      end
+    end
+  end
 end
 

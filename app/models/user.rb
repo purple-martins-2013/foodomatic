@@ -17,4 +17,14 @@ class User < ActiveRecord::Base
     BasketedRecipe.includes(:recipe).where(user_id: self).map(&:recipe)
   end
 
+  def total(basket)
+    item_costs = []
+    basket.each do |recipe|
+      recipe.ingredients.each do |ingredient|
+        item_costs << ingredient.amount_to_buy * ingredient.product.price
+      end
+    end
+    item_costs.inject(:+)
+  end
+
 end
