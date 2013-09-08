@@ -6,7 +6,8 @@ class BasketController < ApplicationController
 
 
   def count_items
-
+    item_count = current_user.basket.size
+    render json: { item_count: item_count }.to_json
   end
 
   def add_to_basket
