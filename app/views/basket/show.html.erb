@@ -13,9 +13,11 @@
   <ul>
     <% @basket.each do |recipe| %>
       <% recipe.ingredients.each do |ingredient| %>
-        <li><%= ingredient.required_amount %> <%= ingredient.product.name %></li>
+        <li><%= ingredient.amount_to_buy %> <%= ingredient.product.name %> <%= ingredient.product.price %></li>
       <% end %>
     <% end %>
   </ul>
+  <h5>Total: $<%= current_user.total(@basket) %> </h5>
+  <a href="#" class="medium button">Buy</a>
   <a class="close-reveal-modal">&#215;</a>
 </div>

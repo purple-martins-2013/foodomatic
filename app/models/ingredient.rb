@@ -5,4 +5,8 @@ class Ingredient < ActiveRecord::Base
   def name
     self.product.name
   end
+
+  def amount_to_buy
+    (self.required_amount.to_f / self.product.min_amount).ceil
+  end
 end
