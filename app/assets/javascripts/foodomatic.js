@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+ 
   $('.sortable').sortable({
     axis: 'y',
     dropOnEmpty: false,
@@ -20,6 +20,23 @@ $(document).ready(function() {
       })
     }
   });
+  if ($('#queue-link').size() > 0) {
+    $('#queue-link').ready(function() {
+
+      var badge_info = $.ajax({
+        url: 'queued_recipes',
+        type: 'GET'
+      });
+
+      badge_info.done(function(data){
+        badge_start = $($(data)).find('#queued-recipe-list li').size();
+        if (badge_start > 0) {
+          $('#queue-link').badger(badge_start.toString());
+        }
+      });
+
+    });
+  };
 
   $('.add-to-queue').on('click', function(e) {
     e.preventDefault();

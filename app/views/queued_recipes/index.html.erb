@@ -1,6 +1,6 @@
 <h3>Your Queued Recipes</h3>
 
-<ol class="sortable">
+<ol class="sortable" id="queued-recipe-list">
   <% @queued_recipes.each do |qr| %>
     <li id="qr_<%= qr.id %>"><span class="handle"><%= qr.recipe.title %></span></li>
   <% end %>
