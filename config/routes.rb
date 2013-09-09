@@ -7,7 +7,7 @@ Foodomatic::Application.routes.draw do
   end
 
   get "basket", to: 'basket#show'
-  post "basket/add_to_basket", to: "basket#add_to_basket"
+  post "basket/add_to_basket", to: "basket#add_to_basket", as: 'add_to_basket'
   get "basket/count_items", to: "basket#count_items"
 
   get "queue/count_items", to: "queued_recipes#count_items"

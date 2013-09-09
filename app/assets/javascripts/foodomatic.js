@@ -21,24 +21,24 @@ $(document).ready(function() {
     }
   });
 
-  $('.add-to-queue').on('click', function(e) {
-    e.preventDefault();
+  function addTo(destination) {
+    $('.add-to-' + destination).on('click', function(e) {
+      e.preventDefault();
 
-    var request = $.ajax({
-      url: $(this).attr('href'),
-      type: 'POST'
+      var request = $.ajax({
+        url: $(this).attr('href'),
+        type: 'POST'
+      });
+
+      request.done(function(data){
+        var badge = (data.item_count).toString();
+        $('#' + destination + '-link').effect('bounce', {times: 3}, "slow").badger(badge);
+      });
+
     });
+  }
 
-    request.done(function(data){
-      var badge = (data.item_count).toString();
-      $('#queue-link').effect('bounce', {times: 3}, "slow").badger(badge);
-    });
-
-  });
-
-  $('.add-to-basket').on('click', function(e) {
-    e.preventDefault();
-    $('#basket-link').effect('bounce', {times: 3}, "slow").badger('+5');
-  });
+  addTo('basket');
+  addTo('queue');
 
 });
