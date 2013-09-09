@@ -21,43 +21,38 @@ $(document).ready(function() {
     }
   });
 
-  if ($('#favorites-link').size() > 0) {
-    $('#favorites-link').ready(function() {
+  function showBadge(destination) {
+    if ($('#' + destination + '-link').size()) {
+      $('#' + destination + '-link').ready(function() {
 
-      var badge_favorites = $.ajax({
-        url: 'favorites/count_items',
-        type: 'GET'
+        var request = $.ajax({
+          url: destination + '/count_items',
+          type: 'GET'
+        });
+
+        request.done(function(data){
+          if (data.item_count) {
+            $('#' + destination + '-link').badger(data.item_count.toString());
+          }
+        });
       });
-
-      badge_favorites.done(function(data){
-
-        favorites_badge_start =  data.item_count;
-        if (favorites_badge_start > 0) {
-          $('#favorites-link').badger(favorites_badge_start.toString());
-        }
-      });
-
-    });
+    }
   };
 
-  if ($('#basket-link').size() > 0) {
-    $('#basket-link').ready(function() {
+  showBadge('favorites');
+  showBadge('basket');
 
-      var badge_basket = $.ajax({
-        url: 'basket/count_items',
-        type: 'GET'
-      });
 
-      badge_basket.done(function(data){
+  $('.remove-from-favorites').on('ajax:success', function(e, data) {
 
-        basket_badge_start = data.item_count;
-        if (basket_badge_start > 0) {
-          $('#basket-link').badger(basket_badge_start.toString());
-        }
-      });
+    $(this).closest('.favorite-recipe').remove();
 
-    });
-  };
+    if (data.item_count) {
+      $('#favorites-link').badger(data.item_count.toString());
+    } else {
+      $('#favorites-link').find('.badger-outter').remove();
+    }
+  });
 
   function bindAddTo(destination) {
     $('.add-to-' + destination).on('click', function(e) {
@@ -78,9 +73,5 @@ $(document).ready(function() {
 
   bindAddTo('basket');
   bindAddTo('favorites');
-
-  $('.remove-from-favorites').on('ajax:success', function() {
-    $(this).closest('.favorite-recipe').remove();
-  })
 
 });

@@ -28,6 +28,6 @@ class FavoriteRecipesController < ApplicationController
 
   def destroy
     FavoriteRecipe.find(params[:id]).destroy
-    redirect_to favorite_recipes_path
+    redirect_to favorites_count_items_path
   end
 end
