@@ -1,5 +1,5 @@
 $(document).ready(function() {
- 
+
   $('.sortable').sortable({
     axis: 'y',
     dropOnEmpty: false,
@@ -16,46 +16,43 @@ $(document).ready(function() {
         complete: function(request) {
           $('.sortable').effect('highlight');
         },
-          url: '/queued_recipes/sort'
+          url: '/favorite_recipes/sort'
       })
     }
   });
-  if ($('#queue-link').size() > 0) {
-    $('#queue-link').ready(function() {
 
-      var badge_queue = $.ajax({
-        url: 'queued_recipes',
-        type: 'GET'
+  function showBadge(destination) {
+    if ($('#' + destination + '-link').size()) {
+      $('#' + destination + '-link').ready(function() {
+
+        var request = $.ajax({
+          url: destination + '/count_items',
+          type: 'GET'
+        });
+
+        request.done(function(data){
+          if (data.item_count) {
+            $('#' + destination + '-link').badger(data.item_count.toString());
+          }
+        });
       });
-
-      badge_queue.done(function(data){
-        badge_start = $($(data)).find('#queued-recipe-list li').size();
-        if (badge_start > 0) {
-          $('#queue-link').badger(badge_start.toString());
-        }
-      });
-
-    });
+    }
   };
 
-  if ($('#basket-link').size() > 0) {
-    $('#basket-link').ready(function() {
+  showBadge('favorites');
+  showBadge('basket');
 
-      var badge_basket = $.ajax({
-        url: 'basket/count_items',
-        type: 'GET'
-      });
 
-      badge_basket.done(function(data){
+  $('.remove-from-favorites').on('ajax:success', function(e, data) {
 
-        basket_badge_start = data.item_count;
-        if (basket_badge_start > 0) {
-          $('#basket-link').badger(basket_badge_start.toString());
-        }
-      });
+    $(this).closest('.favorite-recipe').remove();
 
-    });
-  };
+    if (data.item_count) {
+      $('#favorites-link').badger(data.item_count.toString());
+    } else {
+      $('#favorites-link').find('.badger-outter').remove();
+    }
+  });
 
   function bindAddTo(destination) {
     $('.add-to-' + destination).on('click', function(e) {
@@ -75,10 +72,6 @@ $(document).ready(function() {
   }
 
   bindAddTo('basket');
-  bindAddTo('queue');
-
-  $('.remove-from-queue').on('ajax:success', function() {
-    $(this).closest('.queued-recipe').remove();
-  })
+  bindAddTo('favorites');
 
 });

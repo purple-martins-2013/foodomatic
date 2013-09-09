@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :queued_recipes
+  has_many :favorite_recipes
   has_many :basketed_recipes
 
   def last_position
-    queued_recipes.count + 1
+    favorite_recipes.count + 1
   end
 
   def basket
