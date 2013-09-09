@@ -9,7 +9,7 @@ FactoryGirl.define do
 
     factory :recipe_with_ingredients do
       after(:create) do |recipe|
-        FactoryGirl.create_list(:ingredient, 1, recipe: recipe)
+        FactoryGirl.create_list(:ingredient, 5, recipe: recipe)
       end
     end
   end
