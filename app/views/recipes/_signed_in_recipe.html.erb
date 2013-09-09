@@ -1,0 +1,3 @@
+<% recipe_renderer(recipe).button_partials.each do |button_partial| %>
+  <%= render partial: button_partial, locals: { recipe: recipe } %>
+<% end %>
