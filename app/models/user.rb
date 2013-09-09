@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   end
 
   def in_basket?(recipe)
-    besket.include?(recipe)
+    basket.include?(recipe)
   end
 
 end
