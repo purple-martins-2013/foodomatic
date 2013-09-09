@@ -38,24 +38,28 @@ $(document).ready(function() {
     });
   };
 
-  $('.add-to-queue').on('click', function(e) {
-    e.preventDefault();
+  function bindAddTo(destination) {
+    $('.add-to-' + destination).on('click', function(e) {
+      e.preventDefault();
 
-    var request = $.ajax({
-      url: $(this).attr('href'),
-      type: 'POST'
+      var request = $.ajax({
+        url: $(this).attr('href'),
+        type: 'POST'
+      });
+
+      request.done(function(data){
+        var badge = (data.item_count).toString();
+        $('#' + destination + '-link').effect('bounce', {times: 3}, "slow").badger(badge);
+      });
+
     });
+  }
 
-    request.done(function(data){
-      var badge = (data.queued_recipes_count).toString();
-      $('#queue-link').effect('bounce', {times: 3}, "slow").badger(badge);
-    });
+  bindAddTo('basket');
+  bindAddTo('queue');
 
-  });
-
-  $('.add-to-basket').on('click', function(e) {
-    e.preventDefault();
-    $('#basket-link').effect('bounce', {times: 3}, "slow").badger('+5');
-  });
+  $('.remove-from-queue').on('ajax:success', function() {
+    $(this).closest('.queued-recipe').remove();
+  })
 
 });
