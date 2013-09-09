@@ -17,7 +17,7 @@ class Basket
   end
 
   def include?(recipe)
-    list.include(recipe)
+    list.include?(recipe)
   end
 
 end

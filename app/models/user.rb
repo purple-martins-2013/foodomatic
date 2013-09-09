@@ -20,4 +20,9 @@ class User < ActiveRecord::Base
     basket.include?(recipe)
   end
 
+  def in_queue?(recipe)
+    # REFACTOR: move into Q object
+    QueuedRecipe.includes(:recipe).where(user_id: self.id, recipe_id: recipe.id).any?
+  end
+
 end

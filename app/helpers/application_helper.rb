@@ -14,4 +14,8 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  def recipe_renderer(recipe)
+   RecipeRenderer.new(current_user, recipe)
+  end
+
 end
