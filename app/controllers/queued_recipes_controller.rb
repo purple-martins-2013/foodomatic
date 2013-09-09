@@ -25,4 +25,9 @@ class QueuedRecipesController < ApplicationController
 
     render nothing: true
   end
+
+  def destroy
+    QueuedRecipe.find(params[:id]).destroy
+    redirect_to queued_recipes_path
+  end
 end
