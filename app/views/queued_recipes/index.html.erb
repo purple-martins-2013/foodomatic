@@ -2,6 +2,6 @@
 
 <ol class="sortable">
   <% @queued_recipes.each do |queued_recipe| %>
-    <li id="queued_recipe_<%= queued_recipe.id %>"><span class="handle"><%= queued_recipe.recipe.title %></span><%= button_to "Remove", { action: "destroy", id: queued_recipe.id }, method: :delete, class: "tiny button remove-from-queue" %></li>
+    <li class = "queued-recipe" id="queued_recipe_<%= queued_recipe.id %>"><span class="handle"><%= queued_recipe.recipe.title %></span><%= button_to "Remove", { action: "destroy", id: queued_recipe.id }, method: :delete, remote: true, form_class: 'remove-from-queue', class: "tiny button" %></li>
   <% end %>
 </ol>

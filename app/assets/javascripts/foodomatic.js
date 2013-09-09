@@ -41,4 +41,8 @@ $(document).ready(function() {
     $('#basket-link').effect('bounce', {times: 3}, "slow").badger('+5');
   });
 
+  $('.remove-from-queue').on('ajax:success', function() {
+    $(this).closest('.queued-recipe').remove();
+  })
+
 });
