@@ -15,4 +15,9 @@ class User < ActiveRecord::Base
   def basket
     @basket ||= Basket.new(self)
   end
+
+  def in_basket?(recipe)
+    besket.include?(recipe)
+  end
+
 end
