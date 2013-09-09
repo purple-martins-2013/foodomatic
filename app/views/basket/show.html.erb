@@ -11,13 +11,12 @@
   <h2>Your Grocery List</h2>
   <p class="lead"></p>
   <ul>
-    <% @basket.each do |recipe| %>
-      <% recipe.ingredients.each do |ingredient| %>
-        <li><%= ingredient.amount_to_buy %> <%= ingredient.product.name %> <%= ingredient.product.price %></li>
-      <% end %>
+    <% @grocery_list.list.each do |product_id, amount| %>
+      <% product = Product.find(product_id) %>
+      <li><%= amount.ceil %> <%= product.name %> <%= number_to_currency(product.price) %></li>
     <% end %>
   </ul>
-  <h5>Total: $<%= current_user.total(@basket) %> </h5>
+  <h5>Total: <%= number_to_currency(@grocery_list.total) %> </h5>
   <a href="#" class="medium button">Buy</a>
   <a class="close-reveal-modal">&#215;</a>
 </div>

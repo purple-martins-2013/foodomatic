@@ -15,15 +15,4 @@ class User < ActiveRecord::Base
   def basket
     @basket ||= Basket.new(self)
   end
-
-  def total(basket)
-    item_costs = []
-    basket.each do |recipe|
-      recipe.ingredients.each do |ingredient|
-        item_costs << ingredient.amount_to_buy * ingredient.product.price
-      end
-    end
-    item_costs.inject(:+)
-  end
-
 end

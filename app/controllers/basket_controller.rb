@@ -2,6 +2,7 @@ class BasketController < ApplicationController
 
   def show
     @basket = current_user.basket.list
+    @grocery_list = GroceryList.new(@basket)
   end
 
   def count_items
