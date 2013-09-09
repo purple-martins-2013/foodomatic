@@ -52,7 +52,7 @@ describe BasketController do
       it "returns the number of items in the current user's basket" do
         get :count_items
         parsed_body = JSON.parse(response.body)
-        expect(parsed_body['item_count']).to eq (basket.list.size)
+        expect(parsed_body['item_count']).to eq(basket.size)
       end
 
     end

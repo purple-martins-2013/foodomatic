@@ -12,4 +12,12 @@ class Basket
     BasketedRecipe.create(user_id: @user.id, recipe: recipe)
   end
 
+  def size
+    list.size
+  end
+
+  def include?(recipe)
+    list.include(recipe)
+  end
+
 end

@@ -35,7 +35,7 @@ describe Basket do
     end
 
     it "should add a recipe to the basket" do
-      expect { @basket.add(@recipe) }.to change {@basket.list.size}.by 1
+      expect { @basket.add(@recipe) }.to change {@basket.size}.by 1
     end
 
     it "adds the right recipe to the basket" do
