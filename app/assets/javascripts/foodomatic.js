@@ -1,5 +1,5 @@
 $(document).ready(function() {
- 
+
   $('.sortable').sortable({
     axis: 'y',
     dropOnEmpty: false,
@@ -16,22 +16,22 @@ $(document).ready(function() {
         complete: function(request) {
           $('.sortable').effect('highlight');
         },
-          url: '/queued_recipes/sort'
+          url: '/favorite_recipes/sort'
       })
     }
   });
-  if ($('#queue-link').size() > 0) {
-    $('#queue-link').ready(function() {
+  if ($('#favorites-link').size() > 0) {
+    $('#favorites-link').ready(function() {
 
       var badge_info = $.ajax({
-        url: 'queued_recipes',
+        url: 'favorite_recipes',
         type: 'GET'
       });
 
       badge_info.done(function(data){
-        badge_start = $($(data)).find('#queued-recipe-list li').size();
+        badge_start = $($(data)).find('#favorites-recipe-list li').size();
         if (badge_start > 0) {
-          $('#queue-link').badger(badge_start.toString());
+          $('#favorites-link').badger(badge_start.toString());
         }
       });
 
@@ -56,10 +56,10 @@ $(document).ready(function() {
   }
 
   bindAddTo('basket');
-  bindAddTo('queue');
+  bindAddTo('favorites');
 
-  $('.remove-from-queue').on('ajax:success', function() {
-    $(this).closest('.queued-recipe').remove();
+  $('.remove-from-favorites').on('ajax:success', function() {
+    $(this).closest('.favorite-recipe').remove();
   })
 
 });

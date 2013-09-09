@@ -1,22 +1,22 @@
 require 'spec_helper'
 
-describe QueuedRecipe do
+describe FavoriteRecipe do
 
   before do
-    @queued_recipe = QueuedRecipe.new
+    @favorite_recipe = FavoriteRecipe.new
   end
 
-  subject { @queued_recipe }
+  subject { @favorite_recipe }
 
   it { should belong_to :user }
   it { should belong_to :recipe }
 
   describe "assign position" do
     let(:user) { User.create }
-    let(:qr) { QueuedRecipe.create(user: user) }
+    let(:favorite_recipe) { FavoriteRecipe.create(user: user) }
 
     it "should assign a position before creating" do
-      expect(qr.position).to eq user.last_position
+      expect(favorite_recipe.position).to eq user.last_position
     end
   end
 end

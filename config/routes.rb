@@ -2,7 +2,7 @@ Foodomatic::Application.routes.draw do
   devise_for :users
   resources :recipes, only: [:index]
 
-  resources(:queued_recipes, only: [:create, :index, :destroy]) do
+  resources(:favorite_recipes, only: [:create, :index, :destroy]) do
     post :sort, on: :collection
   end
 
@@ -10,7 +10,7 @@ Foodomatic::Application.routes.draw do
   post "basket/add_to_basket", to: "basket#add_to_basket", as: 'add_to_basket'
   get "basket/count_items", to: "basket#count_items"
 
-  get "queue/count_items", to: "queued_recipes#count_items"
+  get "favorites/count_items", to: "favorite_recipes#count_items"
 
   root 'recipes#index'
 
