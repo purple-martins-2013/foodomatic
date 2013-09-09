@@ -14,12 +14,24 @@ describe GroceryList do
 
   describe "total" do
     it "calculates the total cost of all the recipes in the user's basket" do
-      expect(grocery_list.total).to eq 19.98
+      expect(grocery_list.total).to eq 15.00
     end
   end
 
   describe "list" do
-    it "aggregates ingredients from different recipes if they correspond to the same product"
+    context "when ingredients are unique" do
+      it "returns a hash containing all the ingredients" do
+        expect(grocery_list.list.length).to eq 10
+      end
+    end
+
+    context "when there are duplicate ingredients" do
+      let(:grocery_list) { GroceryList.new([recipe1, recipe1]) }
+
+      it "aggregates ingredients from different recipes if they correspond to the same product" do
+        expect(grocery_list.list.length).to eq 5
+      end
+    end
   end
 
 end
