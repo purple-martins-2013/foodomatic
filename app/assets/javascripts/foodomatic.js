@@ -30,7 +30,7 @@ $(document).ready(function() {
     });
 
     request.done(function(data){
-      var badge = (data.queued_recipes_count).toString();
+      var badge = (data.item_count).toString();
       $('#queue-link').effect('bounce', {times: 3}, "slow").badger(badge);
     });
 

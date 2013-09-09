@@ -3,8 +3,12 @@ class QueuedRecipesController < ApplicationController
     QueuedRecipe.create(
       user: current_user,
       recipe_id: params[:recipe_id])
-    queued_recipes_count = current_user.queued_recipes.count
-    render json: { queued_recipes_count: queued_recipes_count }.to_json
+    redirect_to queue_count_items_path
+  end
+
+  def count_items
+    item_count = current_user.queued_recipes.count
+    render json: { item_count: item_count }.to_json
   end
 
   def index
