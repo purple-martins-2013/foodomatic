@@ -23,15 +23,34 @@ $(document).ready(function() {
   if ($('#queue-link').size() > 0) {
     $('#queue-link').ready(function() {
 
-      var badge_info = $.ajax({
+      var badge_queue = $.ajax({
         url: 'queued_recipes',
         type: 'GET'
       });
 
-      badge_info.done(function(data){
+      badge_queue.done(function(data){
         badge_start = $($(data)).find('#queued-recipe-list li').size();
         if (badge_start > 0) {
           $('#queue-link').badger(badge_start.toString());
+        }
+      });
+
+    });
+  };
+
+  if ($('#basket-link').size() > 0) {
+    $('#basket-link').ready(function() {
+
+      var badge_basket = $.ajax({
+        url: 'basket/count_items',
+        type: 'GET'
+      });
+
+      badge_basket.done(function(data){
+
+        basket_badge_start = data.item_count;
+        if (basket_badge_start > 0) {
+          $('#basket-link').badger(basket_badge_start.toString());
         }
       });
 
