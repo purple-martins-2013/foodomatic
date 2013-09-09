@@ -20,19 +20,20 @@ $(document).ready(function() {
       })
     }
   });
+
   if ($('#favorites-link').size() > 0) {
     $('#favorites-link').ready(function() {
 
       var badge_favorites = $.ajax({
-        url: 'favorite_recipes',
+        url: 'favorites/count_items',
         type: 'GET'
       });
 
       badge_favorites.done(function(data){
-        badge_start = $($(data)).find('#favorites-recipe-list li').size();
 
-        if (badge_start > 0) {
-          $('#favorites-link').badger(badge_start.toString());
+        favorites_badge_start =  data.item_count;
+        if (favorites_badge_start > 0) {
+          $('#favorites-link').badger(favorites_badge_start.toString());
         }
       });
 
