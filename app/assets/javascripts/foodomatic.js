@@ -41,4 +41,8 @@ $(document).ready(function() {
   bindAddTo('basket');
   bindAddTo('queue');
 
+  $('.remove-from-queue').on('ajax:success', function() {
+    $(this).closest('.queued-recipe').remove();
+  })
+
 });
