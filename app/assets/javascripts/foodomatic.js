@@ -21,7 +21,7 @@ $(document).ready(function() {
     }
   });
 
-  function addTo(destination) {
+  function bindAddTo(destination) {
     $('.add-to-' + destination).on('click', function(e) {
       e.preventDefault();
 
@@ -38,7 +38,7 @@ $(document).ready(function() {
     });
   }
 
-  addTo('basket');
-  addTo('queue');
+  bindAddTo('basket');
+  bindAddTo('queue');
 
 });
