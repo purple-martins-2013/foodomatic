@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   include FoundationRailsHelper::FlashHelper
 
   def resource_name

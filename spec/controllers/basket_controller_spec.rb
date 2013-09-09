@@ -9,11 +9,13 @@ describe BasketController do
       sign_in @user
     end
 
+    let(:basket) { @user.basket }
+
     describe "#show" do
 
       it "returns a list of the current_user's basket" do
         get :show
-        expect(assigns(:basket)).to eq @user.basket
+        expect(assigns(:basket)).to eq basket.list
       end
 
       it "returns the correct template" do
@@ -33,7 +35,7 @@ describe BasketController do
         end
 
         it "adds the right recipe to the basket" do
-          expect(@user.basket).to include(@recipe)
+          expect(basket.list).to include(@recipe)
         end
 
         it "redirects to the basket item count" do
@@ -50,7 +52,7 @@ describe BasketController do
       it "returns the number of items in the current user's basket" do
         get :count_items
         parsed_body = JSON.parse(response.body)
-        expect(parsed_body['item_count']).to eq (@user.basket.size)
+        expect(parsed_body['item_count']).to eq (basket.list.size)
       end
 
     end
