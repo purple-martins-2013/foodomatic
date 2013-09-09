@@ -6,6 +6,9 @@ Foodomatic::Application.routes.draw do
     post :sort, on: :collection
   end
 
+  post "basket/add_to_basket", to: "basket#add_to_basket"
+  get "basket/count_items", to: "basket#count_items"
+
   get "basket", to: 'basket#show'
 
   root 'recipes#index'

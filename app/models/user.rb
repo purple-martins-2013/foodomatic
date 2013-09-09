@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
   end
 
   def basket
-    # REFACTOR: there probably is a better way to do this
-    BasketedRecipe.includes(:recipe).where(user_id: self).map(&:recipe)
+    @basket ||= Basket.new(self)
   end
 
   def total(basket)
