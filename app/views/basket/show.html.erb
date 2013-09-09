@@ -13,7 +13,7 @@
   <ul>
     <% @basket.each do |recipe| %>
       <% recipe.ingredients.each do |ingredient| %>
-        <li><%= ingredient.amount_to_buy %> <%= ingredient.product.name %> <%= ingredient.product.price %></li>
+        <li><%= ingredient.amount_to_buy %> <%= ingredient.product.name %> $<%= ingredient.product.price %></li>
       <% end %>
     <% end %>
   </ul>

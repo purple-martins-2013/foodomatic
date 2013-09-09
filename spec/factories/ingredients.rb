@@ -1,9 +1,7 @@
 FactoryGirl.define do
   factory :ingredient do
 
-    sequence :required_amount do |n|
-      n
-    end
+    required_amount 1
 
     recipe
     product
