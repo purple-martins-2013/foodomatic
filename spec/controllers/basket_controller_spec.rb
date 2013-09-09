@@ -31,7 +31,7 @@ describe BasketController do
 
         before do
           @recipe = FactoryGirl.create(:recipe)
-          post :add_to_basket, { recipe: @recipe }
+          post :add_to_basket, { recipe_id: @recipe.id }
         end
 
         it "adds the right recipe to the basket" do
