@@ -22,7 +22,6 @@ describe BasketController do
         get :show
         expect(response).to render_template('show')
       end
-
     end
 
     describe "#add_to_basket" do
@@ -31,7 +30,7 @@ describe BasketController do
 
         before do
           @recipe = FactoryGirl.create(:recipe)
-          post :add_to_basket, { recipe_id: @recipe.id }
+          post :add_to_basket, { id: @recipe.id }
         end
 
         it "adds the right recipe to the basket" do
@@ -41,10 +40,7 @@ describe BasketController do
         it "redirects to the basket item count" do
           expect(response).to redirect_to basket_count_items_path
         end
-
       end
-
-
     end
 
     describe "#item_count" do
@@ -54,8 +50,6 @@ describe BasketController do
         parsed_body = JSON.parse(response.body)
         expect(parsed_body['item_count']).to eq(basket.size)
       end
-
     end
-
   end
 end
