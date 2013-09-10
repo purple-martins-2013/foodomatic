@@ -7,7 +7,7 @@ FactoryGirl.define do
     end
 
     sequence :image_url do |n|
-      "http://placehold.it/500x500&text=#{n}"
+      "http://placehold.it/500x500&text=Steak_#{n}"
     end
 
     factory :recipe_with_ingredients do
