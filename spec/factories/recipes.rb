@@ -5,8 +5,10 @@ FactoryGirl.define do
     sequence :title do
       |n| "Steak #{n}"
     end
-    image_url 'http://placehold.it/500x500&text=Food Porn'
 
+    after(:build) do |recipe|
+      recipe.image_url = "http://placehold.it/500x500&text=#{recipe.title}"
+    end
     factory :recipe_with_ingredients do
       after(:create) do |recipe|
         FactoryGirl.create_list(:ingredient, 5, recipe: recipe)
