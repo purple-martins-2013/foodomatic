@@ -23,4 +23,6 @@ $(document).ready(function() {
   bindAddTo('basket', basketBadge);
   bindAddTo('favorites', favoritesBadge);
 
+  $(".imgLiquidFill").imgLiquid();
+
 });

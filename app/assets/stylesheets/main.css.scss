@@ -14,8 +14,6 @@
   background: url('notebook_@2X.png');
 }
 
-.grocery-list {
-}
 
 #whole-layout {
   margin-top: 20px;
@@ -30,8 +28,29 @@
   font-weight: bold;
 }
 
-#grocer-logo a {
-  width: 153px;
+#grocer-logo img {
+  width: 40px;
+  margin-bottom: 10px;
 }
 
+#grocer-logo a {
+  color: yellow;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+  font-family: 'Pacifico', cursive;
+  font-size: 150%;
+}
 
+.panel {
+  height: 300px;
+  width: 255px;
+}
+
+.imgLiquid {
+  width: 210px;
+  height:240px; 
+}
+
+.add-to-basket {
+  margin-left: 15px;
+  margin-right: 15px;
+}
