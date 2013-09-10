@@ -15,7 +15,7 @@ Badge.prototype.render = function(itemCount, options ) {
     var newCount = itemCount.toString();
     $destinationLink.badger(newCount);
     if (options.bounce) {
-      $destinationLink.stop().effect('bounce', {times: 1}, "fast").badger(newCount);
+      $destinationLink.stop().effect('bounce', {times: 1}, "fast");
     }
   }
 }
