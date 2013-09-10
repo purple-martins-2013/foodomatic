@@ -14,6 +14,18 @@ class IngredientsController < ApplicationController
     render partial: 'ingredient', locals: { ingredient: @ingredient }
   end
 
+  def create
+    recipe = Recipe.find(params[:recipe_id])
+    product = Product.find params[:ingredient][:product_id]
+
+    ingredient = recipe.ingredients.build(ingredient_params)
+    ingredient.product = product
+
+    if ingredient.save
+      redirect_to edit_recipe_path(ingredient.recipe)
+    end
+  end
+
   private
 
   def set_ingredient
@@ -21,7 +33,7 @@ class IngredientsController < ApplicationController
   end
 
   def ingredient_params
-    params.require(:ingredient).permit(:recipe_id, :product_id, :required_amount)
+    params.require(:ingredient).permit(:product_id, :required_amount)
   end
 
 end

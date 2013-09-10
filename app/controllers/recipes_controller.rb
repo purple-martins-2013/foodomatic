@@ -19,6 +19,8 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    @ingredient = Ingredient.new
+    @products = Product.all
   end
 
   def update
