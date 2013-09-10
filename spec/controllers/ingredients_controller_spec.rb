@@ -10,7 +10,7 @@ describe IngredientsController do
     end
 
     it 'adds the right ingredient to the right recipe' do
-      post :create, { ingredient: { recipe_id: @recipe.id, product_id: @product.id, required_amount: 10 }}
+      post :create, { recipe_id: @recipe.id, ingredient: { product_id: @product.id, required_amount: 10 }}
       expect(Ingredient.last.recipe).to eq @recipe
       expect(Ingredient.last.product).to eq @product
       expect(Ingredient.last.required_amount).to eq 10
