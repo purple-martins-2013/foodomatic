@@ -2,6 +2,7 @@ Foodomatic::Application.routes.draw do
   devise_for :users
   resources :recipes, only: [:index]
   resources :ingredients, only: [:create]
+  resources :products, only: [:index]
 
   resources(:favorite_recipes, only: [:create, :index, :destroy]) do
     post :sort, on: :collection
