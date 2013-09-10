@@ -1,1 +1,8 @@
-<li><%= ingredient.name %></li>
+<tr>
+  <td>
+    <%= pluralize(ingredient.required_amount, ingredient.amount_type) %>
+  </td>
+  <td>
+    <%= ingredient.name %>
+  </td>
+</tr>
