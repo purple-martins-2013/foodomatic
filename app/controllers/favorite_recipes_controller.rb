@@ -7,7 +7,11 @@ class FavoriteRecipesController < ApplicationController
   end
 
   def count_items
-    item_count = current_user.favorite_recipes.count
+    if current_user
+      item_count = current_user.favorite_recipes.count
+    else
+      item_count = 0
+    end
     render json: { item_count: item_count }.to_json
   end
 
