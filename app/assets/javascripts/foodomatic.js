@@ -1,9 +1,5 @@
 $(document).ready(function() {
 
-  if($('#favorite-recipe-list').is(':visible')) {
-    new FavoriteRecipesPage();
-  }
-
   var favoritesBadge = new Badge('favorites');
   var basketBadge = new Badge('basket');
 
