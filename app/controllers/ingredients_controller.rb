@@ -15,6 +15,7 @@ class IngredientsController < ApplicationController
   end
 
   def create
+    # REFACTOR: clean up this monstruosity
     recipe = Recipe.find(params[:recipe_id])
     product = Product.find params[:ingredient][:product_id]
 
