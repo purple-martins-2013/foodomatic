@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
-  <a href="#" class="tiny button add-to-basket">Add to Basket</a>
-  <%= link_to "Add to Favorites", favorite_recipes_path(:user_id => current_user.id, :recipe_id => recipe.id), class: "tiny button add-to-favorites" %>
+  <a href="#" class="tiny button add-to-basket"><i class="icon-plus-sign-alt"></i>Basket</a>
+  <%= link_to "Favorites", favorite_recipes_path(:user_id => current_user.id, :recipe_id => recipe.id), class: "tiny button add-to-favorites icon-heart" %>
 <% else %>
-  <%= link_to "Add to Basket", "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
-  <%= link_to "Add to Favorites", "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
+  <%= link_to "Basket", "#", class: "tiny icon-plus-sign-alt", data: { 'reveal-id' => "sign-in-modal"} %>
+  <%= link_to "Favorites", "#", class: "tiny button icon-heart", data: { 'reveal-id' => "sign-in-modal"} %>
 <% end %>

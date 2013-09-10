@@ -12,6 +12,9 @@
  *= require foundation_and_overrides
  *= require jquery.ui.all
  *= require badger.css
+ *= require _settings.scss
+ *= require general_foundicons.scss
+ *= require general_foundicons_ie7.scss
  *= require_tree .
  */
 
