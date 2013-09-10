@@ -2,6 +2,21 @@
   position: relative;
 }
 
+.checkout-button {
+  float: right;
+}
+
+.recipe-partial {
+  clear: both;
+}
+
+#checkout-modal {
+  background: url('notebook_@2X.png');
+}
+
+.grocery-list {
+}
+
 #whole-layout {
   margin-top: 20px;
   background: url('retina_wood_@2X.png');
@@ -14,4 +29,9 @@
 .total {
   font-weight: bold;
 }
+
+#grocer-logo a {
+  width: 153px;
+}
+
 
