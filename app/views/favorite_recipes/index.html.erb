@@ -1,11 +1,5 @@
 <h3>Favorite Recipes</h3>
 
-<ol class="sortable" id="favorite-recipe-list">
-  <% @favorites.each do |recipe| %>
-    <li class = "favorite-recipe" id="favorite_recipe_<%= recipe.id %>">
-      <span class="handle"><%= recipe.title %></span>
-      <%= button_to "Remove", { action: "destroy", id: recipe.id }, method: :delete, remote: true, 
-      form_class: 'remove-from-favorites', class: "tiny button" %>
-    </li>
-  <% end %>
-</ol>
+<div class="row">
+  <%= render partial: 'recipes/recipe', collection: @favorites %>
+</div>
