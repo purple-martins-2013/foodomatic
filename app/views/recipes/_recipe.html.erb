@@ -4,8 +4,8 @@
       <%= image_tag recipe.image_url %>
 
       <% if user_signed_in? %>
-        <%= link_to "Add to Basket", add_to_basket_path(:recipe_id => recipe.id), class: "tiny button add-to-basket" %>
-        <%= link_to "Add to Favorites", favorite_recipes_path(:user_id => current_user.id, :recipe_id => recipe.id), class: "tiny button add-to-favorites" %>
+        <%= link_to "Add to Basket", add_to_basket_path(:id => recipe.id), class: "tiny button add-to-basket" %>
+        <%= link_to "Add to Favorites", favorite_recipes_path(:id => recipe.id), class: "tiny button add-to-favorites" %>
       <% else %>
         <%= link_to "Add to Basket", "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
         <%= link_to "Add to Favorites", "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
@@ -24,7 +24,7 @@
   </ul>
     <% if user_signed_in? %>
       <%= link_to "Add to Basket", add_to_basket_path(:recipe_id => recipe.id), class: "tiny button add-to-basket" %>
-      <%= link_to "Add to Favorites", favorite_recipes_path(:user_id => current_user.id, :recipe_id => recipe.id), class: "tiny button add-to-favorites" %>
+      <%= link_to "Add to Favorites", favorite_recipes_path(:id => recipe.id), class: "tiny button add-to-favorites" %>
     <% else %>
       <%= link_to "Add to Basket", "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
       <%= link_to "Add to Favorites", "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
