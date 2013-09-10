@@ -6,6 +6,10 @@ class Ingredient < ActiveRecord::Base
     self.product.name
   end
 
+  def amount_type
+    self.product.amount_type
+  end
+
   def amount_to_buy
     self.required_amount.to_f / self.product.min_amount
   end
