@@ -15,7 +15,10 @@ test:
   password:
 
 production:
-  adapter: spostgresq
+  adapter: postgresql
+  encoding: unicode
   database: foodomatic
   pool: 5
+  username:
+  password:
   timeout: 5000
