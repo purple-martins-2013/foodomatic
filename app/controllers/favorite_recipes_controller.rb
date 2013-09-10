@@ -1,8 +1,6 @@
 class FavoriteRecipesController < ApplicationController
   def create
-    FavoriteRecipe.create(
-      user: current_user,
-      recipe_id: params[:recipe_id])
+    current_user.favorite_recipes.create(recipe_id: params[:id])
     redirect_to favorites_count_items_path
   end
 
@@ -16,22 +14,12 @@ class FavoriteRecipesController < ApplicationController
   end
 
   def index
-    @favorite_recipes = FavoriteRecipe.where(user: current_user).order('position ASC')
-  end
-
-  def sort
-    @favorite_recipes = FavoriteRecipe.where(user: current_user)
-
-    @favorite_recipes.each do |favorite_recipe|
-      favorite_recipe.position = params['favorite_recipe'].index(favorite_recipe.id.to_s) + 1
-      favorite_recipe.save
-    end
-
-    render nothing: true
+    @favorites = current_user.favorites.list
   end
 
   def destroy
-    FavoriteRecipe.find(params[:id]).destroy
+    recipe = current_user.favorite_recipes.find_by(recipe_id: params[:id])
+    FavoriteRecipe.find(recipe.id).destroy
     redirect_to favorites_count_items_path
   end
 end

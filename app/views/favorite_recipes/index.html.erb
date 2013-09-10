@@ -1,7 +1,11 @@
 <h3>Favorite Recipes</h3>
 
 <ol class="sortable" id="favorite-recipe-list">
-  <% @favorite_recipes.each do |favorite_recipe| %>
-    <li class = "favorite-recipe" id="favorite_recipe_<%= favorite_recipe.id %>"><span class="handle"><%= favorite_recipe.recipe.title %></span><%= button_to "Remove", { action: "destroy", id: favorite_recipe.id }, method: :delete, remote: true, form_class: 'remove-from-favorites', class: "tiny button" %></li>
+  <% @favorites.each do |recipe| %>
+    <li class = "favorite-recipe" id="favorite_recipe_<%= recipe.id %>">
+      <span class="handle"><%= recipe.title %></span>
+      <%= button_to "Remove", { action: "destroy", id: recipe.id }, method: :delete, remote: true, 
+      form_class: 'remove-from-favorites', class: "tiny button" %>
+    </li>
   <% end %>
 </ol>

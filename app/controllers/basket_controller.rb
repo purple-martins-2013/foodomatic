@@ -15,7 +15,7 @@ class BasketController < ApplicationController
   end
 
   def add_to_basket
-    recipe = Recipe.find(params[:recipe_id])
+    recipe = Recipe.find(params[:id])
     current_user.basket.add(recipe)
     redirect_to basket_count_items_path
   end
