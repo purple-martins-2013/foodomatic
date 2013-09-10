@@ -9,4 +9,12 @@ describe RecipesController do
       expect(assigns(:recipes)).to eq Recipe.all
     end
   end
+
+  describe '#create' do
+    it 'should redirect to the recipe edit page' do
+      recipe_args = FactoryGirl.attributes_for :recipe
+      post :create, { recipe: recipe_args }
+      expect(response).to redirect_to recipe_edit_path(Recipe.last)
+    end
+  end
 end
