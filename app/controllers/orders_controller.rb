@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.create(order_params)
-    # redirect_to recipes_path, notice: 'Order placed'
+    redirect_to recipes_path, notice: 'Order placed'
   end
 
   private
