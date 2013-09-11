@@ -16,12 +16,18 @@ class RecipeRenderer
 
   def button_partials
     button_partials = []
-    unless @user.in_basket?(@recipe)
+    if @user.in_basket?(@recipe)
+      button_partials.push 'recipes/manage_in_basket_button'
+    else
       button_partials.push 'recipes/add_to_basket_button'
     end
-    unless @user.in_queue?(@recipe)
-      button_partials.push 'recipes/add_to_queue_button'
+
+    if @user.in_favorites?(@recipe)
+      button_partials.push 'recipes/remove_from_favorites_button'
+    else
+      button_partials.push 'recipes/add_to_favorites_button'
     end
+
     return button_partials
   end
 

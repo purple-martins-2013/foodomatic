@@ -44,28 +44,50 @@ describe RecipeRenderer do
       end
 
       context 'when recipe is in the basket' do
-        it 'returns only the "add to queue" button partial' do
+        before do
           @user.stub(:in_basket?) { true }
-          @user.stub(:in_queue?) { false }
-          expect(recipe_renderer.button_partials).to eq ['recipes/add_to_queue_button']
+        end
+        it 'returns the "manage in basket" button partial' do
+          expect(recipe_renderer.button_partials).to include('recipes/manage_in_basket_button')
+        end
+        it 'does *not* return the "add to basket" button partial' do
+          expect(recipe_renderer.button_partials).not_to include('recipes/add_to_basket_button')
         end
       end
 
-      context 'when recipe is in the queue' do
-        it 'returns only the "add to basket" button partial' do
-          @user.stub(:in_queue?) { true }
+      context 'when recipe is *not* in the basket' do
+        before do
           @user.stub(:in_basket?) { false }
-          expect(recipe_renderer.button_partials).to eq ['recipes/add_to_basket_button']
+        end
+        it 'does *not* return the "manage in basket" button partial' do
+          expect(recipe_renderer.button_partials).not_to include('recipes/manage_in_basket_button')
+        end
+        it 'returns the "add to basket" button partial' do
+          expect(recipe_renderer.button_partials).to include('recipes/add_to_basket_button')
         end
       end
 
-      context 'when recipe is neither in the basket nor in the queue' do
-        it 'returns both the "add to basket" and "add to queue" button partials' do
-          @user.stub(:in_basket?) { false }
-          @user.stub(:in_queue?) { false }
+      context 'when recipe is in the favorites' do
+        before do
+          @user.stub(:in_favorites?) { true }
+        end
+        it 'returns the "remove from favorites" button partial' do
+          expect(recipe_renderer.button_partials).to include('recipes/remove_from_favorites_button')
+        end
+        it 'does *not* return the "add to favorites" button partial' do
+          expect(recipe_renderer.button_partials).not_to include('recipes/add_to_favorites_button')
+        end
+      end
 
-          expected_partials = ['recipes/add_to_basket_button', 'recipes/add_to_queue_button']
-          expect(recipe_renderer.button_partials).to eq expected_partials
+      context 'when recipe is *not* in the favorites' do
+        before do
+          @user.stub(:in_favorites?) { false }
+        end
+        it 'does *not* return the "remove from favorites" button partial' do
+          expect(recipe_renderer.button_partials).not_to include('recipes/remove_from_favorites_button')
+        end
+        it 'returns the "add to favorites" button partial' do
+          expect(recipe_renderer.button_partials).to include('recipes/add_to_favorites_button')
         end
       end
     end
