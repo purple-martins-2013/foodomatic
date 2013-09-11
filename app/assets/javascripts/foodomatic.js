@@ -23,4 +23,12 @@ $(document).ready(function() {
 
   $("#ingredient_product_id").select2();
 
+  $('.quantity-field').change(function() {
+    var item = $(this).closest('div');
+    var newCost = $(item).find('.product_price').val() * $(this).val();
+   
+    ($(item).find('.item-cost').html(newCost)).formatCurrency();
+    ($(this).closest('form').find('.total').html(updatedTotal())).formatCurrency();
+  });
+
 });
