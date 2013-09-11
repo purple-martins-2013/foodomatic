@@ -1,0 +1,5 @@
+<ul class='inline-list'>
+  <% recipe_renderer(recipe).button_partials.each do |button_partial| %>
+    <li><%= render partial: button_partial, locals: { recipe: recipe } %></li>
+  <% end %>
+</ul>

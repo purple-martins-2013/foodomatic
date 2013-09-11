@@ -16,8 +16,16 @@ class User < ActiveRecord::Base
     @basket ||= Basket.new(self)
   end
 
-
   def favorites
     @favorites ||= Favorites.new(self)
   end
+
+  def in_basket?(recipe)
+    basket.include?(recipe)
+  end
+
+  def in_favorites?(recipe)
+    favorites.include?(recipe)
+  end
+
 end

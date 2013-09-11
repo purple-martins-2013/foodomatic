@@ -17,7 +17,11 @@ class Basket
   end
 
   def include?(recipe)
-    list.include(recipe)
+    list.include?(recipe)
+  end
+
+  def clear
+    @user.basketed_recipes.destroy_all
   end
 
 end

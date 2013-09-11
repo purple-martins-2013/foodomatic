@@ -19,6 +19,7 @@
 //= require chosen.proto.min.js
 //= require select2.min.js
 //= require imgLiquid-min.js
+//= require jquery.formatCurrency-1.4.0.min.js
 //= require foundation
 //= require_tree .
 
