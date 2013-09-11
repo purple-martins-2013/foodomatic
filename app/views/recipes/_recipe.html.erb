@@ -3,11 +3,11 @@
     <div class="panel">
       <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
       <% if user_signed_in? %>
-        <%= link_to '<i class="icon-plus-sign-alt"></i> Basket'.html_safe, add_to_basket_path(:id => recipe.id), class: "tiny button add-to-basket" %>
-        <%= link_to '<i class="icon-heart"></i> Favorites'.html_safe, favorite_recipes_path(:id => recipe.id), class: "tiny button add-to-favorites" %>
+        <%= link_to '<i class="icon-plus"></i><i class="icon-shopping-cart"></i>'.html_safe, add_to_basket_path(:id => recipe.id), class: "tiny button add-to-basket" %>
+        <%= link_to '<i class="icon-plus"></i><i class="icon-heart"></i>'.html_safe, favorite_recipes_path(:id => recipe.id), class: "tiny button add-to-favorites" %>
       <% else %>
-        <%= link_to '<i class="icon-plus-sign-alt"></i> Basket'.html_safe, "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
-        <%= link_to '<i class="icon-heart"></i> Favorites'.html_safe, "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
+        <%= link_to '<i class="icon-plus"></i><i class="icon-shopping-cart"></i>'.html_safe, "#", class: "tiny button not-add-to-basket", data: { 'reveal-id' => "sign-in-modal"} %>
+        <%= link_to '<i class="icon-plus"></i><i class="icon-heart"></i>'.html_safe, "#", class: "tiny button not-add-to-favorites", data: { 'reveal-id' => "sign-in-modal"} %>
       <% end %>
 
     </div>
@@ -15,16 +15,16 @@
 </a>
 
 <!-- Recipe modal -->
-<div id="recipe-<%= recipe.id %>-modal" class="reveal-modal medium">
+<div id="recipe-<%= recipe.id %>-modal" class="reveal-modal small">
   <h2><%= recipe.title %></h2>
   <p class="lead"></p>
     <%= render partial: 'recipes/recipe_ingredients', locals: { recipe: recipe } %>
     <% if user_signed_in? %>
-      <%= link_to '<i class="icon-plus-sign-alt"></i> Basket'.html_safe, add_to_basket_path(:recipe_id => recipe.id), class: "tiny button add-to-basket" %>
-      <%= link_to '<i class="icon-heart"></i> Favorites'.html_safe, favorite_recipes_path(:id => recipe.id), class: "tiny button add-to-favorites" %>
+      <%= link_to '<i class="icon-plus"></i><i class="icon-shopping-cart"></i>'.html_safe, add_to_basket_path(:recipe_id => recipe.id), class: "tiny button modal-basket add-to-basket" %>
+      <%= link_to '<i class="icon-plus"></i><i class="icon-heart"></i>'.html_safe, favorite_recipes_path(:id => recipe.id), class: "tiny button add-to-favorites" %>
     <% else %>
-      <%= link_to '<i class="icon-plus-sign-alt"></i> Basket'.html_safe, "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
-      <%= link_to '<i class="icon-heart"></i> Favorites'.html_safe, "#", class: "tiny button", data: { 'reveal-id' => "sign-in-modal"} %>
+      <%= link_to '<i class="icon-plus"></i><i class="icon-shopping-cart"></i>'.html_safe, "#", class: "tiny button modal-basket not-add-to-basket", data: { 'reveal-id' => "sign-in-modal"} %>
+      <%= link_to '<i class="icon-plus"></i><i class="icon-heart"></i>'.html_safe, "#", class: "tiny button not-add-to-favorites", data: { 'reveal-id' => "sign-in-modal"} %>
     <% end %>
   <a class="close-reveal-modal">&#215;</a>
 </div>
