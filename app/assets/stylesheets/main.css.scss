@@ -46,9 +46,35 @@
 }
 
 .imgLiquid {
-  width: 210px;
+  width: 200px;
   height:240px; 
 }
 .panel .button {
   margin-top: 8px;
+}
+
+#new_recipe {
+  width: 70%;
+  padding-left: 20%;
+}
+
+#new-recipe-form {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ingredient_required_amount {
+  width: 50px;
+  display: inline;
+  border-radius: 5px;
+  height: 29px;
+}
+
+.select2-container {
+  padding-bottom: 3px;
+}
+
+footer {
+  text-align: center;
 }

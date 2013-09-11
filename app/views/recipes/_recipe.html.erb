@@ -1,15 +1,19 @@
   <div class="available-recipe recipe large-3 small-6 columns">
     <div class="panel">
+
       <a href="#" data-reveal-id="recipe-<%= recipe.id %>-modal">
-        <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
+        <div class="imgLiquidFill imgLiquid">
+          <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
+        </div>
       </a>
+
       <%= render_recipe_detail(recipe) %>
     </div>
   </div>
 
-<!-- Recipe modal -->
 
 <div id="recipe-<%= recipe.id %>-modal" class="reveal-modal small">
+  <!-- Recipe modal -->
   <a class="close-reveal-modal">&#215;</a>
   <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
   <h2><%= recipe.title %></h2>
