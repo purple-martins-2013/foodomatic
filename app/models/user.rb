@@ -5,24 +5,27 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :queued_recipes
+  has_many :favorite_recipes
   has_many :basketed_recipes
 
   def last_position
-    queued_recipes.count + 1
+    favorite_recipes.count + 1
   end
 
   def basket
     @basket ||= Basket.new(self)
   end
 
+  def favorites
+    @favorites ||= Favorites.new(self)
+  end
+
   def in_basket?(recipe)
     basket.include?(recipe)
   end
 
-  def in_queue?(recipe)
-    # REFACTOR: move into Q object
-    QueuedRecipe.includes(:recipe).where(user_id: self.id, recipe_id: recipe.id).any?
+  def in_favorites?(recipe)
+    favorites.include?(recipe)
   end
 
 end

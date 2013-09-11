@@ -2,10 +2,13 @@
 
 FactoryGirl.define do
   factory :recipe do
-    sequence :title do
-      |n| "Steak #{n}"
+    sequence :title do |n|
+      "Steak #{n}"
     end
-    image_url 'http://placehold.it/500x500&text=Food Porn'
+
+    sequence :image_url do |n|
+      "http://placehold.it/500x500&text=Steak_#{n}"
+    end
 
     factory :recipe_with_ingredients do
       after(:create) do |recipe|

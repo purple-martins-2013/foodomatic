@@ -15,6 +15,10 @@
 //= require jquery.ui.all
 //= require jquery.classywiggle.js
 //= require jquery.badger.js
+//= require chosen.jquery.min.js
+//= require chosen.proto.min.js
+//= require select2.min.js
+//= require imgLiquid-min.js
 //= require foundation
 //= require_tree .
 

@@ -13,6 +13,10 @@ group :development, :test do
   gem 'shoulda'
 end
 
+group :test do
+  gem 'simplecov'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'zurb-foundation'
@@ -27,8 +31,6 @@ gem 'coffee-rails', '~> 4.0.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-
-gem 'acts_as_list'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

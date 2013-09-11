@@ -1,9 +1,23 @@
-#queue-link, #basket-link {
+#favorites-link, #basket-link {
   position: relative;
 }
 
+.checkout-button {
+  float: right;
+}
+
+.recipe-partial {
+  clear: both;
+}
+
+#checkout-modal {
+  background: image-url('notebook.png');
+}
+
+
 #whole-layout {
   margin-top: 20px;
+  background: image-url('retina_wood.png');
 }
 
 .quantity {
@@ -12,4 +26,39 @@
 
 .total {
   font-weight: bold;
+}
+
+#grocer-logo img {
+  width: 40px;
+  margin-bottom: 10px;
+}
+
+#grocer-logo a {
+  color: #FFE59A;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+  font-family: 'Pacifico', cursive;
+  font-size: 150%;
+}
+
+.panel {
+  height: 300px;
+  width: 240px;
+}
+
+.imgLiquid {
+  width: 210px;
+  height:240px; 
+}
+
+.add-to-basket, .not-add-to-basket {
+  margin-left: 17px;
+  margin-right: 80px;
+}
+
+.modal-basket{
+  margin-left: 0;
+}
+
+.panel .button {
+  margin-top: 8px;
 }

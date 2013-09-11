@@ -5,11 +5,11 @@ class Basket
   end
 
   def list
-    BasketedRecipe.includes(:recipe).where(user_id: @user.id).map(&:recipe)
+    @user.basketed_recipes.includes(:recipe).map(&:recipe)
   end
 
   def add(recipe)
-    BasketedRecipe.create(user_id: @user.id, recipe: recipe)
+    @user.basketed_recipes.create(recipe: recipe)
   end
 
   def size

@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130907002311) do
+ActiveRecord::Schema.define(version: 20130910222824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "basketed_recipes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "recipe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "favorite_recipes", force: true do |t|
+    t.integer  "position"
     t.integer  "user_id"
     t.integer  "recipe_id"
     t.datetime "created_at"
@@ -31,19 +39,26 @@ ActiveRecord::Schema.define(version: 20130907002311) do
     t.datetime "updated_at"
   end
 
+  create_table "ordered_products", force: true do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "quantity"
+  end
+
+  create_table "orders", force: true do |t|
+    t.integer  "user_id"
+    t.decimal  "total"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "products", force: true do |t|
     t.string   "name"
     t.string   "amount_type"
     t.decimal  "price"
     t.integer  "min_amount"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "queued_recipes", force: true do |t|
-    t.integer  "position"
-    t.integer  "user_id"
-    t.integer  "recipe_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

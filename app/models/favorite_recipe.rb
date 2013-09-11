@@ -1,8 +1,9 @@
-class QueuedRecipe < ActiveRecord::Base
+class FavoriteRecipe < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipe
 
-  acts_as_list
+  scope :ordered, -> { order(:position) }
+  scope :with_recipe, -> { includes(:recipe) }
 
   before_create :assign_position
 
