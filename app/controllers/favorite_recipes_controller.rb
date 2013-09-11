@@ -18,8 +18,7 @@ class FavoriteRecipesController < ApplicationController
   end
 
   def destroy
-    recipe = current_user.favorite_recipes.find_by(recipe_id: params[:id])
-    FavoriteRecipe.find(recipe.id).destroy
+    current_user.favorite_recipes.where(recipe_id: params[:id]).destroy_all
     redirect_to favorites_count_items_path
   end
 end

@@ -30,6 +30,16 @@ Badge.prototype.add = function(url) {
   });
 }
 
+Badge.prototype.remove = function(url) {
+  var self = this;
+  var request = $.ajax({
+    url: url,
+    type: 'DELETE'
+  }).done(function(data){
+    self.render(data.item_count, { bounce: true })
+  });
+}
+
 Badge.prototype.refresh = function() {
   var promise = $.Deferred()
     $.ajax({
