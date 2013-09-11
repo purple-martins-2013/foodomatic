@@ -10,4 +10,7 @@ class OrderedProduct < ActiveRecord::Base
     self.quantity * self.product.price
   end
 
+  def price
+    self.product.price
+  end
 end
