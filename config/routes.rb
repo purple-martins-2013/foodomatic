@@ -11,6 +11,9 @@ Foodomatic::Application.routes.draw do
     post :sort, on: :collection
   end
 
+  resources :orders, only: [:create]
+  resources :ordered_products, only: [:create]
+
   get "basket", to: 'basket#show'
   post "basket/add_to_basket", to: "basket#add_to_basket", as: 'add_to_basket'
   get "basket/count_items", to: "basket#count_items"
