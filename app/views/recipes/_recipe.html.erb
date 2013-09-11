@@ -10,7 +10,6 @@
 <!-- Recipe modal -->
 
 <div id="recipe-<%= recipe.id %>-modal" class="reveal-modal small">
-  <a class="close-reveal-modal">&#215;</a>
   <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
   <h2><%= recipe.title %></h2>
   <%= render partial: 'recipes/recipe_ingredients', locals: { recipe: recipe } %>
