@@ -8,32 +8,29 @@
 
 <!-- Checkout modal -->
 <div id="checkout-modal" class="reveal-modal small">
-  <h2>Your Grocery List</h2>
-  <p class="lead"></p>
-  <table class="grocery-list">
-    <thead>
-      <tr>
-        <th>Quantity</th>
-        <th>Item</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-
-    <tbody>
-    <% @grocery_list.list.each do |product_id, amount| %>
-      <% product = Product.find(product_id) %>
-        <tr>
-          <td class="quantity"><%= amount.ceil %></td>
-          <td><%= product.name %></td> 
-          <td><%= number_to_currency(product.price * amount.ceil) %></td>
-        </tr>
-    <% end %>
-      <tr>
-        <td></td>
-        <td class="total">Total:</td>
-        <td class="total"><%= number_to_currency(@grocery_list.total) %></td>
-    </tbody>
-  </table>
-  <a href="#" class="medium button">Buy</a>
   <a class="close-reveal-modal">&#215;</a>
+  <h2>Grocery List</h2>
+  <p class="lead"></p>
+
+  <%= form_for @order do |order_form| %>
+
+    <% @order.ordered_products.each do |ordered_product| %>
+      <%= order_form.fields_for :ordered_products, ordered_product do |ordered_product_fields| %>
+        <%= ordered_product_fields.text_field :quantity %>
+        <%= ordered_product_fields.hidden_field :product_id %>
+        <%= ordered_product.name %>
+        <%= ordered_product.cost %>
+      <% end %>
+      <hr>
+      <%= order_form.hidden_field :total, value: @order.total %>
+      <%= order_form.hidden_field :user_id, value: current_user.id %>
+    <% end %>
+
+    <h2>Total: <%= @order.total %></h2>
+
+
+    <%= order_form.submit 'Buy', class: 'medium button' %>
+
+  <% end %>
+
 </div>
