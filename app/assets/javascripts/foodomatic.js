@@ -21,4 +21,6 @@ $(document).ready(function() {
 
   $(".imgLiquidFill").imgLiquid();
 
+  $("#ingredient_product_id").select2();
+
 });

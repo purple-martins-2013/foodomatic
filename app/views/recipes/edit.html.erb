@@ -5,6 +5,6 @@
 <%= render partial: 'recipes/recipe_ingredients', locals: { recipe: @recipe } %>
 <%= form_for [@recipe, @ingredient] do |f| %>
   <%= f.number_field :required_amount %>
-  <%= f.collection_select :product_id, @products, :id, :name_with_amount_type %>
+  <%= f.collection_select :product_id, @products, :id, :name_with_amount_type, id: "ingredient_product_id" %>
   <%= f.submit %>
 <% end %>
