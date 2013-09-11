@@ -15,7 +15,11 @@ module ApplicationHelper
   end
 
   def recipe_renderer(recipe)
-   RecipeRenderer.new(current_user, recipe)
+    RecipeRenderer.new(current_user, recipe)
+  end
+
+  def render_recipe_detail(recipe)
+    render partial: recipe_renderer(recipe).detail_partial, locals: { recipe: recipe }
   end
 
 end

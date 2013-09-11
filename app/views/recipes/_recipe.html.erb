@@ -14,5 +14,5 @@
   <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
   <h2><%= recipe.title %></h2>
   <%= render partial: 'recipes/recipe_ingredients', locals: { recipe: recipe } %>
-  <%= render partial: recipe_renderer(recipe).detail_partial, locals: { recipe: recipe } %>
+  <%= render_recipe_detail(recipe) %>
 </div>
