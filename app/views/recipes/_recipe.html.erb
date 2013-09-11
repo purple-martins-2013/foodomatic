@@ -1,30 +1,22 @@
-<a href="#" data-reveal-id="recipe-<%= recipe.id %>-modal">
   <div class="available-recipe recipe large-3 small-6 columns">
     <div class="panel">
-      <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
-      <% if user_signed_in? %>
-        <%= link_to '<i class="icon-plus"></i> <i class="icon-shopping-cart"></i>'.html_safe, add_to_basket_path(:id => recipe.id), class: "tiny round button add-to-basket" %>
-        <%= link_to '<i class="icon-plus"></i> <i class="icon-heart"></i>'.html_safe, favorite_recipes_path(:id => recipe.id), class: "tiny round button add-to-favorites" %>
-      <% else %>
-        <%= link_to '<i class="icon-plus"></i> <i class="icon-shopping-cart"></i>'.html_safe, "#", class: "tiny round button not-add-to-basket", data: { 'reveal-id' => "sign-in-modal"} %>
-        <%= link_to '<i class="icon-plus"></i> <i class="icon-heart"></i>'.html_safe, "#", class: "tiny round button not-add-to-favorites", data: { 'reveal-id' => "sign-in-modal"} %>
-      <% end %>
 
+      <a href="#" data-reveal-id="recipe-<%= recipe.id %>-modal">
+        <div class="imgLiquidFill imgLiquid">
+          <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
+        </div>
+      </a>
+
+      <%= render_recipe_detail(recipe) %>
     </div>
   </div>
-</a>
 
-<!-- Recipe modal -->
+
 <div id="recipe-<%= recipe.id %>-modal" class="reveal-modal small">
-  <h2><%= recipe.title %></h2>
-  <p class="lead"></p>
-    <%= render partial: 'recipes/recipe_ingredients', locals: { recipe: recipe } %>
-    <% if user_signed_in? %>
-      <%= link_to '<i class="icon-plus"></i> <i class="icon-shopping-cart"></i>'.html_safe, add_to_basket_path(:recipe_id => recipe.id), class: "tiny round button modal-basket add-to-basket" %>
-      <%= link_to '<i class="icon-plus"></i> <i class="icon-heart"></i>'.html_safe, favorite_recipes_path(:id => recipe.id), class: "tiny round button add-to-favorites" %>
-    <% else %>
-      <%= link_to '<i class="icon-plus"></i> <i class="icon-shopping-cart"></i>'.html_safe, "#", class: "tiny round button modal-basket not-add-to-basket", data: { 'reveal-id' => "sign-in-modal"} %>
-      <%= link_to '<i class="icon-plus"></i> <i class="icon-heart"></i>'.html_safe, "#", class: "tiny round button not-add-to-favorites", data: { 'reveal-id' => "sign-in-modal"} %>
-    <% end %>
+  <!-- Recipe modal -->
   <a class="close-reveal-modal">&#215;</a>
+  <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
+  <h2><%= recipe.title %></h2>
+  <%= render partial: 'recipes/recipe_ingredients', locals: { recipe: recipe } %>
+  <%= render_recipe_detail(recipe) %>
 </div>

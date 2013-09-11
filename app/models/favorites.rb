@@ -1,4 +1,5 @@
 class Favorites
+
   attr_reader :user
 
   def initialize(user)
@@ -12,4 +13,9 @@ class Favorites
   def add(recipe)
     @user.favorite_recipes.create(recipe: recipe)
   end
+
+  def include?(recipe)
+    list.include?(recipe)
+  end
+
 end

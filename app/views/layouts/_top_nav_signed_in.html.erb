@@ -1,3 +1,5 @@
+<li class="active" id="new-recipe-link"><%= link_to ' Create Recipe', new_recipe_path, class: "icon-edit" %></li>
+<li class="divider"></li>
 <li class="active" id="basket-link"><%= link_to ' Basket', basket_path, class: "icon-shopping-cart" %></li>
 <li class="divider"></li>
 <li class="active" id="favorites-link"><%= link_to " Favorites", favorite_recipes_path, class: "icon-heart" %></li>
@@ -9,4 +11,3 @@
   <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
   <li><%= link_to ' Log Out', destroy_user_session_path, method: :delete, class: "icon-signout" %></li>
 </ul>
-

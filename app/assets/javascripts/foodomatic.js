@@ -36,8 +36,6 @@ $(document).ready(function() {
 
   $(".imgLiquidFill").imgLiquid();
 
-  $("#ingredient_product_id").select2();
-
   $('.quantity-field').change(function() {
     var item = $(this).closest('div');
     var newCost = $(item).find('.product_price').val() * $(this).val();
@@ -46,4 +44,8 @@ $(document).ready(function() {
     ($(this).closest('form').find('.total').html(updatedTotal())).formatCurrency();
   });
 
+  $("#ingredient_product_id").select2({
+    placeholder: "Select a Product",
+    allowClear: true
+  });
 });
