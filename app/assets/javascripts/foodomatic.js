@@ -16,6 +16,21 @@ $(document).ready(function() {
     });
   }
 
+  function updatedTotal() {
+    var productCosts = []
+    var costElements = $('#new_order').find('.item-cost')
+    for (var i = 0; i < costElements.length; i++) {
+      var cost = parseFloat($(costElements[i]).html().substring(1))
+      productCosts.push(cost)
+    }
+
+    var total = 0;
+    $.each(productCosts, function() {
+      total += this;
+    });
+    return total;
+  };
+
   bindAddTo('basket', basketBadge);
   bindAddTo('favorites', favoritesBadge);
 

@@ -20,14 +20,6 @@
   background: image-url('retina_wood.png');
 }
 
-.quantity {
-  text-align: center;
-}
-
-.total {
-  font-weight: bold;
-}
-
 #grocer-logo img {
   width: 40px;
   margin-bottom: 10px;
@@ -61,4 +53,13 @@
 
 .panel .button {
   margin-top: 8px;
+}
+
+.nice .quantity-field {
+  width: 48px;
+  display: inline;
+}
+
+.total-display {
+  display: inline;
 }
