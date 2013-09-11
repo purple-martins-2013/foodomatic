@@ -24,4 +24,27 @@ describe Ingredient do
         expect(ingredient.amount_to_buy).to eq 2
     end
   end
+
+
+  describe "delegations to product" do
+
+    before do
+      @product = FactoryGirl.create :product
+      @ingredient = FactoryGirl.create(:ingredient, product: @product)
+    end
+
+    describe '#name' do
+      it "returns the name of the ingredient's product" do
+        expect(@ingredient.name).to eq @product.name
+      end
+    end
+
+
+    describe '#amount_type' do
+      it "returns the amount type of the ingredients's product" do
+        expect(@ingredient.amount_type).to eq @product.amount_type
+      end
+    end
+  end
+
 end
