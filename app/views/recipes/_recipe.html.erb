@@ -20,7 +20,7 @@
   <p class="lead"></p>
     <%= render partial: 'recipes/recipe_ingredients', locals: { recipe: recipe } %>
     <% if user_signed_in? %>
-      <%= link_to '<i class="icon-plus"></i> <i class="icon-shopping-cart"></i>'.html_safe, add_to_basket_path(:recipe_id => recipe.id), class: "tiny round button modal-basket add-to-basket" %>
+      <%= link_to '<i class="icon-plus"></i> <i class="icon-shopping-cart"></i>'.html_safe, add_to_basket_path(:id => recipe.id), class: "tiny round button modal-basket add-to-basket" %>
       <%= link_to '<i class="icon-plus"></i> <i class="icon-heart"></i>'.html_safe, favorite_recipes_path(:id => recipe.id), class: "tiny round button add-to-favorites" %>
     <% else %>
       <%= link_to '<i class="icon-plus"></i> <i class="icon-shopping-cart"></i>'.html_safe, "#", class: "tiny round button modal-basket not-add-to-basket", data: { 'reveal-id' => "sign-in-modal"} %>
