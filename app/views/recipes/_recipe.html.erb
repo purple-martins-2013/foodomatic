@@ -1,7 +1,9 @@
 <a href="#" data-reveal-id="recipe-<%= recipe.id %>-modal">
   <div class="available-recipe recipe large-3 small-6 columns">
     <div class="panel">
-      <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
+      <div class="imgLiquidFill imgLiquid">
+        <%= image_tag recipe.image_url %>
+      </div>
       <% if user_signed_in? %>
         <%= link_to '<i class="icon-plus"></i> <i class="icon-shopping-cart"></i>'.html_safe, add_to_basket_path(:id => recipe.id), class: "tiny round button add-to-basket" %>
         <%= link_to '<i class="icon-plus"></i> <i class="icon-heart"></i>'.html_safe, favorite_recipes_path(:id => recipe.id), class: "tiny round button add-to-favorites" %>

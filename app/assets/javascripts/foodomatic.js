@@ -21,6 +21,8 @@ $(document).ready(function() {
 
   $(".imgLiquidFill").imgLiquid();
 
-  $("#ingredient_product_id").select2();
-
+  $("#ingredient_product_id").select2({
+    placeholder: "Select a Product",
+    allowClear: true
+  });
 });
