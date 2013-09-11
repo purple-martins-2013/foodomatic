@@ -8,4 +8,5 @@ describe Order do
   subject { @order }
 
   it { should belong_to :user }
+  it { should have_many :ordered_products }
 end
