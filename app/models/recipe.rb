@@ -11,4 +11,12 @@ class Recipe < ActiveRecord::Base
 
   has_many :ingredients
   has_many :products, through: :ingredients
+
+  def self.search(search)
+    if search
+      Recipe.where("lower(title) like ?", "%#{search.downcase}%")
+    else
+      Recipe.all
+    end
+  end
 end
