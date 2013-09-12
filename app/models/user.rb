@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :lockable,
+  devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable,
   :omniauthable, :omniauth_providers => [:facebook]
 
@@ -41,18 +41,22 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
+    puts auth
+    puts "*" * 100
     user = where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       user.name = auth["info"]["name"]
+      user.password = Devise.friendly_token.first(16)
+      user.email = auth["info"]["email"]
       # user.image = auth["info"]["image"]
       # user.gender = auth["extra"]["raw_info"]["gender"]
       # user.token = auth["credentials"]["token"]
     end
+    user.save
     puts "*" * 100
     p user.errors
     puts "*" * 100
-    user.save
     user
   end
 
