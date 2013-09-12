@@ -12,6 +12,10 @@ class Basket
     @user.basketed_recipes.create(recipe: recipe)
   end
 
+  def remove(recipe)
+    @user.basketed_recipes.where(recipe_id: recipe).first.try(:destroy)
+  end
+
   def size
     list.size
   end

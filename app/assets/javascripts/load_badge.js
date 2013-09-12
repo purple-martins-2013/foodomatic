@@ -7,7 +7,8 @@ function Badge(destination) {
   });
 }
 
-Badge.prototype.render = function(itemCount, options ) {
+Badge.prototype.render = function(itemCount, options) {
+  options = options || {}
   var $destinationLink = $('#' + this.destination + '-link');
   if (itemCount === 0) {
     $destinationLink.find('.badger-outter').remove();
@@ -25,6 +26,16 @@ Badge.prototype.add = function(url) {
   var request = $.ajax({
     url: url,
     type: 'POST'
+  }).done(function(data){
+    self.render(data.item_count, { bounce: true })
+  });
+}
+
+Badge.prototype.remove = function(url) {
+  var self = this;
+  var request = $.ajax({
+    url: url,
+    type: 'DELETE'
   }).done(function(data){
     self.render(data.item_count, { bounce: true })
   });
