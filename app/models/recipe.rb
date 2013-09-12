@@ -16,7 +16,7 @@ class Recipe < ActiveRecord::Base
     if search
       num_terms = search.split.length
       query = (['title ILIKE ?'] * num_terms).join(' AND ')
-      find(:all, conditions: [query] + search.split.map { |term| "%#{term}%" })
+      Recipe.where([query] + search.split.map { |term| "%#{term}%" })
     else
       Recipe.all
     end
