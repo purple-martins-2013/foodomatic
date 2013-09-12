@@ -38,5 +38,9 @@ module ApplicationHelper
 
     end
   end
-  
+
+  def resource_class
+    devise_mapping.to
+  end
+
 end
