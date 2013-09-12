@@ -17,10 +17,9 @@ Foodomatic::Application.routes.draw do
   get "basket", to: 'basket#show'
   post "basket/add_to_basket", to: "basket#add_to_basket", as: 'add_to_basket'
   delete "basket/delte_from_basket", to: "basket#remove_from_basket", as: 'remove_from_basket'
-  get "basket/count_items", to: "basket#count_items"
 
-  get "favorites/count_items", to: "favorite_recipes#count_items"
+  get 'favorites/count_items', to: 'favorite_recipes#count_items'
+  get 'basket/count_items', to: 'basket#count_items'
 
   root 'recipes#index'
-
 end

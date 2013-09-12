@@ -7,7 +7,8 @@ function Badge(destination) {
   });
 }
 
-Badge.prototype.render = function(itemCount, options ) {
+Badge.prototype.render = function(itemCount, options) {
+  options = options || {}
   var $destinationLink = $('#' + this.destination + '-link');
   if (itemCount === 0) {
     $destinationLink.find('.badger-outter').remove();

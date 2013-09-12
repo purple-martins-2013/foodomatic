@@ -11,28 +11,33 @@ class BasketController < ApplicationController
 
     @order.total = @grocery_list.total
     @order.user = current_user
-
-  end
-
-  def count_items
-    if current_user
-      item_count = current_user.basket.size
-    else
-      item_count = 0
-    end
-    render json: { item_count: item_count }.to_json
   end
 
   def add_to_basket
     recipe = Recipe.find(params[:id])
     current_user.basket.add(recipe)
-    redirect_to basket_count_items_path
+    render json: count_basket_items
   end
 
   def remove_from_basket
     recipe = Recipe.find(params[:id])
     current_user.basket.remove(recipe)
-    redirect_to basket_count_items_path
+    render json: count_basket_items
+  end
+
+  def count_items
+    render json: count_basket_items
+  end
+
+  private
+
+  def count_basket_items
+    if current_user
+      item_count = current_user.basket.size
+    else
+      item_count = 0
+    end
+    return { item_count: item_count }.to_json
   end
 
 end

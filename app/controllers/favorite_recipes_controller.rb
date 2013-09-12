@@ -1,16 +1,7 @@
 class FavoriteRecipesController < ApplicationController
   def create
     current_user.favorite_recipes.create(recipe_id: params[:id])
-    redirect_to favorites_count_items_path
-  end
-
-  def count_items
-    if current_user
-      item_count = current_user.favorite_recipes.count
-    else
-      item_count = 0
-    end
-    render json: { item_count: item_count }.to_json
+    render json: favorites_count
   end
 
   def index
@@ -19,6 +10,22 @@ class FavoriteRecipesController < ApplicationController
 
   def destroy
     current_user.favorite_recipes.where(recipe_id: params[:id]).destroy_all
-    redirect_to favorites_count_items_path
+    render json: favorites_count
   end
+
+  def count_items
+    render json: favorites_count
+  end
+
+  private
+
+  def favorites_count
+    if current_user
+      item_count = current_user.favorite_recipes.count
+    else
+      item_count = 0
+    end
+    return { item_count: item_count }.to_json
+  end
+
 end
