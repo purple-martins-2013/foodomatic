@@ -14,7 +14,9 @@ class Recipe < ActiveRecord::Base
 
   def self.search(search)
     if search
-      Recipe.where("lower(title) like ?", "%#{search.downcase}%")
+      num_terms = search.split.length
+      query = (['title ILIKE ?'] * num_terms).join(' AND ')
+      Recipe.where([query] + search.split.map { |term| "%#{term}%" })
     else
       Recipe.all
     end

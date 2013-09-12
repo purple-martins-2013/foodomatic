@@ -10,7 +10,7 @@
   clear: both;
 }
 
-#checkout-modal {
+#checkout-modal, #grocery-list-modal {
   background: image-url('notebook.png');
 }
 
@@ -104,4 +104,29 @@ footer .love {
 
 .total-display {
   display: inline;
+}
+
+.grocery-button {
+  float: right;
+  margin-right: -10px;
+  margin-left: 10px;
+}
+
+.final-grocery-list {
+  width: 600px;
+  height: 700px;
+}
+
+.final-grocery-list {
+  font-size: 20pt;
+}
+
+.grocery-list-show-page {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grocery-list-header {
+  text-align: center;
 }
