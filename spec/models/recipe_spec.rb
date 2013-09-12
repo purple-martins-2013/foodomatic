@@ -26,6 +26,20 @@ describe Recipe do
 
   end
 
+  describe "search" do
+    context "when search term is nil" do
+      it "returns all the recipes" do
+        expect(Recipe.search(nil)).to eq Recipe.all
+      end
+    end
+
+    context "a search term exists" do
+      it "returns the recipes where the title includes the search term" do
+        expect(Recipe.search('steak')).to eq [@recipe]
+      end
+    end
+  end
+
   subject { @recipe }
 
   it { should respond_to :title }
