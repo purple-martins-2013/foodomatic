@@ -22,4 +22,19 @@ module ApplicationHelper
     render partial: recipe_renderer(recipe).detail_partial, locals: { recipe: recipe }
   end
 
+  def classes_for_recipe(recipe)
+
+    classes = []
+    if current_user.in_basket?(recipe)
+      classes << 'basketed-recipe'
+    end
+
+    if current_user.in_favorites?(recipe)
+      classes << 'favorite-recipe'
+    end
+
+    return classes.join(' ')
+
+  end
+
 end
