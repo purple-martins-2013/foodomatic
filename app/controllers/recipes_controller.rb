@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:edit, :update]
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.search(params[:search])
   end
 
   def new

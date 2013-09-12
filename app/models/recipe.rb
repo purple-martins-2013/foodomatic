@@ -11,4 +11,14 @@ class Recipe < ActiveRecord::Base
 
   has_many :ingredients
   has_many :products, through: :ingredients
+
+  def self.search(search)
+    if search
+      num_terms = search.split.length
+      query = (['title ILIKE ?'] * num_terms).join(' AND ')
+      Recipe.where([query] + search.split.map { |term| "%#{term}%" })
+    else
+      Recipe.all
+    end
+  end
 end

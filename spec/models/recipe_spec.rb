@@ -26,6 +26,30 @@ describe Recipe do
 
   end
 
+  describe "search" do
+    context "when search term is nil" do
+      it "returns all the recipes" do
+        expect(Recipe.search(nil)).to eq Recipe.all
+      end
+    end
+
+    context "when there is 1 search term" do
+      it "returns recipes where the title includes the search term" do
+        expect(Recipe.search('steak')).to eq [@recipe]
+      end
+    end
+
+    context "when there is more than 1 search term" do
+      before do
+        @recipe_2 = Recipe.create(title: 'Fried Chicken', image_url: 'http://www.friedchicken.com')
+      end
+
+      it "returns recipes where the title includes all the search terms, regardless of order" do
+        expect(Recipe.search('chicken fried')).to eq [@recipe_2]
+      end
+    end
+  end
+
   subject { @recipe }
 
   it { should respond_to :title }
