@@ -25,6 +25,7 @@ $(document).ready(function() {
     });
   };
   bindRemoveFrom('favorites', favoritesBadge);
+  bindRemoveFrom('basket', basketBadge);
 
   $(".imgLiquidFill").imgLiquid();
 
