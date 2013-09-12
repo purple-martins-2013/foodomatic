@@ -43,18 +43,15 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     user = where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth["provider"]
-      puts "*" * 100
-      p auth["provider"]
       user.uid = auth["uid"]
       user.name = auth["info"]["name"]
       # user.image = auth["info"]["image"]
-      user.email = auth["info"]["email"]
       # user.gender = auth["extra"]["raw_info"]["gender"]
       # user.token = auth["credentials"]["token"]
     end
-    p auth
-    "*" * 100
-    p user
+    puts "*" * 100
+    p user.errors
+    puts "*" * 100
     user.save
     user
   end
@@ -63,11 +60,11 @@ class User < ActiveRecord::Base
 
   def validate_on_provider_presence
     unless self.provider.nil?
-      if !self.email.nil? && !self.password_hash.nil? 
+      if !self.email.nil? && !self.encrypted_password.nil? 
         return
       else
-        errors.add(:email, "needs email") if self.email.nil?
-        errors.add(:email, "needs password") if self.password_hash.nil?
+        self.errors.add(:email, "needs email") if self.email.nil?
+        self.errors.add(:encrypted_password, "needs password") if self.encrypted_password.nil?
       end
     end
   end
