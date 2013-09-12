@@ -37,10 +37,8 @@ describe BasketController do
           expect(basket.list).to include(@recipe)
         end
 
-        it "redirects to the basket item count" do
-          expect(response).to redirect_to basket_count_items_path
-        end
       end
+
     end
 
     describe "#item_count" do
