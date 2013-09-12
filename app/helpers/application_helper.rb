@@ -27,14 +27,10 @@ module ApplicationHelper
     classes = []
     if current_user.in_basket?(recipe)
       classes << 'basketed-recipe'
-    else
-      classes << 'non-basketed-recipe'
-   end
+    end
 
     if current_user.in_favorites?(recipe)
       classes << 'favorite-recipe'
-    else
-      classes << 'non-favorite-recipe'
     end
 
     return classes.join(' ')
