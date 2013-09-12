@@ -1,0 +1,7 @@
+<h1>Let's Go Shop</h1>
+
+<textarea class="final-grocery-list">
+    <% @list.each do |quantity, item| %>
+      <%= "* #{quantity} #{item}" %>
+    <% end %>
+</textarea>

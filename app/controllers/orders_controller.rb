@@ -6,6 +6,18 @@ class OrdersController < ApplicationController
     redirect_to recipes_path, notice: 'Order placed'
   end
 
+  def show
+    order = Order.where(user_id: current_user.id).last
+    ordered_prod = OrderedProduct.where(order_id: order)
+    products = Product.where(id: ordered_prod).pluck('name')
+    quantity = OrderedProduct.where(order_id: order).pluck('quantity')
+    @list = quantity.zip(products)
+  end
+
+  def update
+
+  end
+
   private
 
   def order_params
