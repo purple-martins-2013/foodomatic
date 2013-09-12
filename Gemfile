@@ -23,6 +23,11 @@ gem 'zurb-foundation'
 gem 'foundation_rails_helper'
 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-oauth2', '~> 1.0.2'
+gem 'omniauth-facebook'
+gem 'bcrypt-ruby' 
+gem 'dotenv-rails', :groups => [:development, :test]
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
