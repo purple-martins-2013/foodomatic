@@ -11,7 +11,6 @@ class BasketController < ApplicationController
 
     @order.total = @grocery_list.total
     @order.user = current_user
-
   end
 
   def count_items

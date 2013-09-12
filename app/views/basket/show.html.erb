@@ -41,20 +41,19 @@
   <a class="close-reveal-modal">&#215;</a>
   <h2>Grocery List</h2>
   <p class="lead"></p>
-
-  <%= form_for @order do |order_form| %>
-    <% @order.ordered_products.each do |ordered_product| %>
-      <%= order_form.fields_for :ordered_products, ordered_product do |ordered_product_fields| %>
-        <div>
-          <%= ordered_product_fields.number_field :quantity, min: 0, class: 'quantity-field' %>
-          <%= ordered_product_fields.hidden_field :product_id %>
-          <span><%= ordered_product.name %></span>
-        </div>
+    <%= form_for @order do |item| %>
+      <% @order.ordered_products.each do |listed_product| %>
+        <%= item.fields_for :ordered_products, listed_product do |listed_product_fields| %>
+          <div>
+            <%= listed_product_fields.number_field :quantity, min: 0, class: 'quantity-field' %>
+            <%= listed_product_fields.hidden_field :product_id %>
+            <span><%= listed_product.name %></span>
+          </div>
+        <% end %>
       <% end %>
-      <%= order_form.hidden_field :user_id, value: current_user.id %>
-    <% end %>
       <br><br>
-    <%= order_form.submit 'Generate Grocery-List', class: 'medium button' %>
-  <% end %>
+      <%= item.submit 'Generate Grocery-List', class: 'medium button' %>
+    <% end %>
 
+  
 </div>
