@@ -54,4 +54,9 @@ $(document).ready(function() {
     return total;
   };
 
+  $('.final_grocery_list').on('click', function(){
+    $(this).focus();
+    $(this).select();
+  });
+
 });
