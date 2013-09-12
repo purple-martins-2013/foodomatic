@@ -49,7 +49,7 @@ FactoryGirl.define do
       "Steak #{n}"
     end
 
-    image_url(food_porn_urls.shuffle!.pop || "http://placehold.it/500x500&text=Steak_#{n}")
+    image_url { food_porn_urls.shuffle!.pop || "http://placehold.it/500x500&text=Steak_#{n}" }
 
     factory :recipe_with_ingredients do
       after(:create) do |recipe|
