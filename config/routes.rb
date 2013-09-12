@@ -13,7 +13,7 @@ Foodomatic::Application.routes.draw do
     post :sort, on: :collection
   end
 
-  resources :orders, only: [:create]
+  resources :orders, only: [:create, :show]
   resources :ordered_products, only: [:create]
 
   get "basket", to: 'basket#show'

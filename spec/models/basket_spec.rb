@@ -45,4 +45,15 @@ describe Basket do
 
   end
 
+  describe "#clear" do
+    before do
+      @recipe = FactoryGirl.create :recipe
+      @basket.add(@recipe)
+    end
+
+    it "removes all the recipes from the basket" do
+      expect{@basket.clear}.to change{@basket.list.size}.by(-1)
+    end
+  end
+
 end

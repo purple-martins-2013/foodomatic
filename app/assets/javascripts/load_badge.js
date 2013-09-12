@@ -21,23 +21,29 @@ Badge.prototype.render = function(itemCount, options) {
   }
 }
 
-Badge.prototype.add = function(url) {
+Badge.prototype.add = function(url, recipeContainer) {
   var self = this;
   var request = $.ajax({
     url: url,
     type: 'POST'
   }).done(function(data){
     self.render(data.item_count, { bounce: true })
+    if (data.item_in_basket) {
+      recipeContainer.addClass(data.container_type)
+    }
   });
 }
 
-Badge.prototype.remove = function(url) {
+Badge.prototype.remove = function(url, recipeContainer) {
   var self = this;
   var request = $.ajax({
     url: url,
     type: 'DELETE'
   }).done(function(data){
     self.render(data.item_count, { bounce: true })
+    if (!data.item_in_basket) {
+      recipeContainer.removeClass(data.container_type)
+    }
   });
 }
 

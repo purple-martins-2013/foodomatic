@@ -5,11 +5,13 @@ gem 'rails', '4.0.0'
 
 gem 'pg'
 
+# Seed in production as well
+gem 'factory_girl_rails'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
   gem 'shoulda'
 end
 
