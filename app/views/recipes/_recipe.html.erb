@@ -5,7 +5,7 @@
 
       <a href="#" data-reveal-id="recipe-<%= recipe.id %>-modal">
         <div class="imgLiquidFill imgLiquid">
-          <%= image_tag recipe.image_url, class: "imgLiquidFill imgLiquid" %>
+          <%= image_tag recipe.image_url, title: recipe.title, class: "imgLiquidFill imgLiquid" %>
         </div>
       </a>
 
@@ -17,7 +17,7 @@
   <div id="recipe-<%= recipe.id %>-modal" class="reveal-modal small">
     <!-- Recipe modal -->
     <a class="close-reveal-modal">&#215;</a>
-    <%= image_tag recipe.image_url%>
+    <%= image_tag recipe.image_url, title: recipe.title %>
     <h2><%= recipe.title %></h2>
     <%= render partial: 'recipes/recipe_ingredients', locals: { recipe: recipe } %>
     <%= render_recipe_detail(recipe) %>
