@@ -14,7 +14,7 @@ Badge.prototype.render = function(itemCount, options ) {
   } else {
     var newCount = itemCount.toString();
     $destinationLink.badger(newCount);
-    if (options.bounce) {
+    if (options && options.bounce) {
       $destinationLink.stop().effect('bounce', {times: 1}, "fast");
     }
   }
@@ -32,6 +32,7 @@ Badge.prototype.add = function(url) {
 
 Badge.prototype.remove = function(url) {
   var self = this;
+  debugger
   var request = $.ajax({
     url: url,
     type: 'DELETE'
