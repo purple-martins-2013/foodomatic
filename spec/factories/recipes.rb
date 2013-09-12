@@ -50,8 +50,8 @@ FactoryGirl.define do
     end
 
     sequence :image_url do |n|
-      # "http://placehold.it/500x500&text=Steak_#{n}"
-      food_porn_urls.shuffle!.pop
+      "http://placehold.it/500x500&text=Steak_#{n}"
+      #food_porn_urls.shuffle!.pop
     end
 
     factory :recipe_with_ingredients do
