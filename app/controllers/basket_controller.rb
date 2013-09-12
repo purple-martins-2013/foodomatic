@@ -16,17 +16,17 @@ class BasketController < ApplicationController
   def add_to_basket
     recipe = Recipe.find(params[:id])
     current_user.basket.add(recipe)
-    render json: count_basket_items
+    render json: count_basket_items.merge(recipe_in_basket?(recipe)).to_json
   end
 
   def remove_from_basket
     recipe = Recipe.find(params[:id])
     current_user.basket.remove(recipe)
-    render json: count_basket_items
+    render json: count_basket_items.merge(recipe_in_basket?(recipe)).to_json
   end
 
   def count_items
-    render json: count_basket_items
+    render json: count_basket_items.to_json
   end
 
   private
@@ -37,7 +37,11 @@ class BasketController < ApplicationController
     else
       item_count = 0
     end
-    return { item_count: item_count }.to_json
+    return { container_type: 'basketed-recipe', item_count: item_count }
+  end
+
+  def recipe_in_basket?(recipe)
+    { item_in_basket: current_user.in_basket?(recipe) }
   end
 
 end

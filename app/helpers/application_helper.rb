@@ -25,12 +25,15 @@ module ApplicationHelper
   def classes_for_recipe(recipe)
 
     classes = []
-    if current_user.in_basket?(recipe)
-      classes << 'basketed-recipe'
-    end
 
-    if current_user.in_favorites?(recipe)
-      classes << 'favorite-recipe'
+    if user_signed_in?
+      if current_user.in_basket?(recipe)
+        classes << 'basketed-recipe'
+      end
+
+      if current_user.in_favorites?(recipe)
+        classes << 'favorite-recipe'
+      end
     end
 
     return classes.join(' ')

@@ -3,27 +3,24 @@ $(document).ready(function() {
   var favoritesBadge = new Badge('favorites');
   var basketBadge = new Badge('basket');
 
-
-  $('.remove-from-favorites').on('ajax:success', function(e, data) {
-    $(this).closest('.favorite-recipe').remove();
-    favoritesBadge.render(data.item_count);
-  });
-
   function bindAddTo(destination, badge) {
     $('.add-to-' + destination).on('click', function(e) {
       e.preventDefault();
-      badge.add($(this).attr('href'));
+      var recipeContainer = $(this).closest('.recipe-container');
+      badge.add($(this).attr('href'), recipeContainer);
     });
   }
-  bindAddTo('basket', basketBadge);
-  bindAddTo('favorites', favoritesBadge);
 
   function bindRemoveFrom(destination, badge) {
     $('.remove-from-' + destination).on('click', function(e) {
       e.preventDefault();
-      badge.remove($(this).attr('href'));
+      var recipeContainer = $(this).closest('.recipe-container');
+      badge.remove($(this).attr('href'), recipeContainer);
     });
   };
+
+  bindAddTo('basket', basketBadge);
+  bindAddTo('favorites', favoritesBadge);
   bindRemoveFrom('favorites', favoritesBadge);
   bindRemoveFrom('basket', basketBadge);
 
