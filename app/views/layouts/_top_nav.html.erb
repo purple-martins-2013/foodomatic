@@ -13,16 +13,16 @@
       <ul class="right">
         <li class="divider"></li>
         <li class="has-form nav-bar-coloring">
-          <form>
+          <%= form_tag root_path, method: 'get' do %>
             <div class="row collapse">
               <div class="small-8 columns">
-                <input type="text">
+                <%= text_field_tag :search, params[:search] %>
               </div>
               <div class="small-4 columns">
-                <a href="#" class="button">Search</a>
+                <%= submit_tag "Search", class: "button" %>
               </div>
             </div>
-          </form>
+          <% end %>
         </li>
 
         <li class="divider"></li>
