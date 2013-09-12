@@ -1,5 +1,7 @@
 Foodomatic::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+
+  
 
   resources :recipes, only: [:create, :new, :edit, :index, :update] do
     resources :ingredients, only: [:create]
