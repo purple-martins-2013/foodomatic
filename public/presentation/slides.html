@@ -48,10 +48,12 @@
     <section class='slide'>
       <div class='spacer top'></div>
       <div class='content'>
-        <h2>The solution</h2>
+        <h2>The solution: Grocer Ease</h2>
         
-        <p>Grocer Ease. Choose recipes you want to cook. Click a button. Get the
-        ingredients you need delivered to your door.</p>
+        <ul>
+        <li>Choose recipes you want to cook.</li>
+        <li>Get the ingredients you need delivered to your door.</li>
+        </ul>
       </div>
       <div class='spacer bottom'></div>
     </section>
@@ -93,6 +95,155 @@
       <div class='spacer bottom'></div>
     </section>
     <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h2>The feature</h2>
+        
+        <p>Signing in users through Facebook</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h2>The solution</h2>
+        
+        <p>OmniAuth with Devise</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h2>Recipe Search: Version 1</h2>
+        
+        <p><textarea class='code' display='none' mode='ruby'>class RecipesController < ApplicationController&#x000A;  def search&#x000A;    @recipes = Recipe.where("lower(title) like ?",&#x000A;      "%#{params[:search].downcase}%)&#x000A;  end&#x000A;end</textarea>
+    </p>
+        
+        <ul>
+        <li>Only works for 1 word searches</li>
+        <li>Not very DRY</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h2>Refactoring Search</h2>
+        
+        <p>Re-use index route instead of creating a new route and view</p>
+        
+        <p><textarea class='code' display='none' mode='ruby'>class RecipesController < ApplicationController&#x000A;  def index&#x000A;    @recipes = Recipe.search(params[:search])&#x000A;  end&#x000A;end</textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h2>Refactoring Search</h2>
+        
+        <p>Move logic to the <code>Recipe</code> model</p>
+        
+        <p><textarea class='code' display='none' mode='ruby'>class Recipe < ActiveRecord::Base&#x000A;  def self.search(search)&#x000A;    if search&#x000A;      num_terms = search.split.length&#x000A;      query = (['title ILIKE ?'] * num_terms).join(' AND ')&#x000A;      Recipe.where(&#x000A;        [query] +&#x000A;        search.split.map { |term| "%#{term}%" })&#x000A;    else&#x000A;      Recipe.all&#x000A;    end&#x000A;  end&#x000A;end</textarea>
+    </p>
+        
+        <ul>
+        <li>Use <code>ILIKE</code> instead of <code>lower</code> and <code>downcase</code></li>
+        <li>Accommodate multiple search terms</li>
+        <li>Return all recipes if no search term</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <p><img src="images/_recipe.png" alt="recipe partial" /></p>
+        
+        <h2>The problem</h2>
+        
+        <p>Displaying recipes. We need to show different buttons depending on the status of the recipe.</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h2>The solution</h2>
+        
+        <ul>
+        <li><code>RecipeRenderer</code>, the first attempt
+        
+        <ul>
+        <li>split every button in its own partial</li>
+        <li>load needed partials according to the recipe status</li>
+        </ul>
+        </li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h3><code>Renderer#button_partials</code></h3>
+        
+        <p><textarea class='code' display='none' mode='ruby'>def button_partials&#x000A;&#x000A;  button_partials = []&#x000A;&#x000A;  if @user.in_basket?(@recipe)&#x000A;    button_partials.push 'recipes/manage_in_basket_button'&#x000A;  else&#x000A;    button_partials.push 'recipes/add_to_basket_button'&#x000A;  end&#x000A;&#x000A;  if @user.in_favorites?(@recipe)&#x000A;    button_partials.push 'recipes/remove_from_favorites_button'&#x000A;  else&#x000A;    button_partials.push 'recipes/add_to_favorites_button'&#x000A;  end&#x000A;&#x000A;  return button_partials&#x000A;&#x000A;end</textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='code slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h3>Except that...</h3>
+        
+        <p>what about updating buttons on <code>ajax:success</code>?!</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h3>CSS to the rescue</h3>
+        
+        <ul>
+        <li>render all the buttons every time (retire <code>RecipeRenderer</code>)</li>
+        <li>show/hide buttons depending on the <code>HTML</code> class of the recipe</li>
+        <li><code>ajax:success</code> can just change the class of the recipe</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h4>Default Recipe view</h4>
+        
+        <p><textarea class='code' display='none' mode='htmlembedded'><div class='recipe'>&#x000A;  <!-- delicious stuff -->&#x000A;</div></textarea>
+    </p>
+        
+        <p><textarea class='code' display='none' mode='sass'>.controls&#x000A;  .add-to-favorites-controls&#x000A;    display: inline&#x000A;  .remove-from-favorites-controls&#x000A;    display: none</textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='code slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h4>Favorite Recipe view</h4>
+        
+        <p><textarea class='code' display='none' mode='htmlembedded'><div class='recipe favorite-recipe'>&#x000A;  <!-- delicious stuff -->&#x000A;</div></textarea>
+    </p>
+        
+        <p><textarea class='code' display='none' mode='sass'>.favorite-recipe .controls&#x000A;  .add-to-favorites-controls&#x000A;    display: none&#x000A;  .remove-from-favorites-controls&#x000A;    display: inline</textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='code slide'>
       <div class='spacer top'></div>
       <div class='content'>
         <p><img src="images/badges.png" alt="badge" /></p>
@@ -147,176 +298,7 @@
     <section class='slide'>
       <div class='spacer top'></div>
       <div class='content'>
-        <h2>The feature</h2>
-        
-        <p>Signing in users through Facebook</p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h2>The solution</h2>
-        
-        <p>OmniAuth with Devise</p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h2>Recipe Search</h2>
-        
-        <p><textarea class='code' display='none' mode='ruby'>class RecipesController < ApplicationController&#x000A;  def search&#x000A;    @recipes = Recipe.where("lower(title) like ?",&#x000A;      "%#{params[:search].downcase}%)&#x000A;  end&#x000A;end</textarea>
-    </p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h2>Refactoring Search 1</h2>
-        
-        <p>Re-use index route instead of creating a new route and view
-        <textarea class='code' display='none' mode='ruby'>class RecipesController < ApplicationController&#x000A;  def index&#x000A;    @recipes = Recipe.search(params[:search])&#x000A;  end&#x000A;end</textarea>
-    </p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h2>Refactoring Search 2</h2>
-        
-        <p>Move logic to the <code>Recipe</code> model
-        <textarea class='code' display='none' mode='ruby'>class Recipe < ActiveRecord::Base&#x000A;  def self.search(search)&#x000A;    if search&#x000A;      num_terms = search.split.length&#x000A;      query = (['title ILIKE ?'] * num_terms).join(' AND ')&#x000A;      Recipe.where(&#x000A;        [query] +&#x000A;        search.split.map { |term| "%#{term}%" })&#x000A;    else&#x000A;      Recipe.all&#x000A;    end&#x000A;  end&#x000A;end</textarea>
-    </p>
-        
-        <ul>
-        <li>Use <code>ILIKE</code> instead of <code>lower</code> and <code>downcase</code></li>
-        <li>Accommodate multiple search terms</li>
-        <li>Return all recipes if no search term</li>
-        </ul>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <p><img src="images/_recipe.png" alt="recipe partial" /></p>
-        
-        <h2>The problem</h2>
-        
-        <p>Displaying the right buttons to manage recipes</p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <ul>
-        <li>The <code>_recipe</code> partial is used in several views:
-        
-        <ul>
-        <li>index</li>
-        <li>basket</li>
-        <li>favorites</li>
-        </ul>
-        </li>
-        <li>Different buttons depending on recipe status</li>
-        </ul>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h3>Basketed Recipe:</h3>
-        
-        <p><img src="images/_basketed.png" alt="basketed recipe" />
-        (Look at the buttons, not at the food porn)</p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h3>Favorite Recipe:</h3>
-        
-        <p><img src="images/_favorited.png" alt="favorite recipe" /></p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h3>Basketed and Favorite Recipe:</h3>
-        
-        <p><img src="images/_favorited+basketed.png" alt="basketed and favorited recipe partial" /></p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h2>The solution</h2>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h3><code>RecipeRenderer</code>, the first attempt</h3>
-        
-        <ul>
-        <li>split every button in its own partial</li>
-        <li>load needed partials according to the recipe status</li>
-        </ul>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h3><code>Renderer#button_partials</code></h3>
-        
-        <p><textarea class='code' display='none' mode='ruby'>def button_partials&#x000A;&#x000A;  button_partials = []&#x000A;&#x000A;  if @user.in_basket?(@recipe)&#x000A;    button_partials.push 'recipes/manage_in_basket_button'&#x000A;  else&#x000A;    button_partials.push 'recipes/add_to_basket_button'&#x000A;  end&#x000A;&#x000A;  if @user.in_favorites?(@recipe)&#x000A;    button_partials.push 'recipes/remove_from_favorites_button'&#x000A;  else&#x000A;    button_partials.push 'recipes/add_to_favorites_button'&#x000A;  end&#x000A;&#x000A;  return button_partials&#x000A;&#x000A;end</textarea>
-    </p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='code slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h3>Except that...</h3>
-        
-        <p>what about updating buttons on <code>ajax:success</code>?!</p>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h3>CSS to the rescue</h3>
-        
-        <ul>
-        <li>render all the buttons every time (retire <code>RecipeRenderer</code>)</li>
-        <li>show/hide buttons depending on the <code>HTML</code> class of the recipe</li>
-        <li><code>ajax:success</code> can just change the class of the recipe</li>
-        </ul>
-      </div>
-      <div class='spacer bottom'></div>
-    </section>
-    <section class='slide'>
-      <div class='spacer top'></div>
-      <div class='content'>
-        <h4>Recipe view</h4>
-        
-        <p><textarea class='code' display='none' mode='htmlembedded'><div class='recipe favorite'>&#x000A;  <!-- delicious stuff -->&#x000A;</div></textarea>
-    </p>
-        
-        <p><textarea class='code' display='none' mode='sass'>.controls&#x000A;  .add-to-favorites-controls&#x000A;    display: inline&#x000A;  .remove-from-favorites-controls&#x000A;    display: none&#x000A;&#x000A;.favorite-recipe .controls&#x000A;  .add-to-favorites-controls&#x000A;    display: none&#x000A;  .remove-from-favorites-controls&#x000A;    display: inline</textarea>
-    </p>
+        <h2><code>Questions?</code></h2>
       </div>
       <div class='spacer bottom'></div>
     </section>
