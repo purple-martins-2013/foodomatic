@@ -15,14 +15,12 @@ class IngredientsController < ApplicationController
   end
 
   def create
-    # REFACTOR: clean up this monstruosity
     recipe = Recipe.find(params[:recipe_id])
-    product = Product.find params[:ingredient][:product_id]
-
-    ingredient = recipe.ingredients.build(ingredient_params)
-    ingredient.product = product
-
-    if ingredient.save
+    product = Product.find(ingredient_params[:product_id])
+    required_amount = ingredient_params[:required_amount]
+    ingredient = recipe.add_ingredient(required_amount, product)
+    
+    if ingredient
       redirect_to edit_recipe_path(ingredient.recipe)
     end
   end

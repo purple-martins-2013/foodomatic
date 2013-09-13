@@ -22,4 +22,13 @@ class GroceryList
     end
     list
   end
+
+  def build_products_list(order)
+    list.each do | product_id, amount |
+      order.ordered_products.build(
+        quantity: amount.ceil,
+        product_id: product_id
+      )
+    end
+  end
 end

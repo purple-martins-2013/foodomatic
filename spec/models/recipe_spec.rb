@@ -6,6 +6,16 @@ describe Recipe do
     @recipe = FactoryGirl.create :recipe
   end
 
+  subject { @recipe }
+
+    it { should respond_to :title }
+    it { should respond_to :image_url }
+
+    it { should have_many(:favorite_recipes) }
+    it { should have_many(:basketed_recipes) }
+
+    it { should have_many(:products).through(:ingredients) }
+
   describe 'validations' do
     it { should validate_presence_of :title }
     it { should validate_uniqueness_of :title }
@@ -23,7 +33,6 @@ describe Recipe do
         expect(@recipe).not_to be_valid
       end
     end
-
   end
 
   describe "search" do
@@ -50,14 +59,17 @@ describe Recipe do
     end
   end
 
-  subject { @recipe }
+  describe "#add_ingredient" do
 
-  it { should respond_to :title }
-  it { should respond_to :image_url }
+    let(:product) { FactoryGirl.create :product }
+    let(:ingredient) { @recipe.add_ingredient(1, product) }
 
-  it { should have_many(:favorite_recipes) }
-  it { should have_many(:basketed_recipes) }
+    it "creates a new ingredient" do
+      expect { @recipe.add_ingredient(1, product) }.to change{ @recipe.ingredients.size }.by(1)
+    end
 
-  it { should have_many(:products).through(:ingredients) }
-
+    it "the new ingredient created belongs to the right product" do
+      expect(ingredient.product).to eq product
+    end
+  end
 end

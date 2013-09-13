@@ -21,4 +21,15 @@ class Recipe < ActiveRecord::Base
       Recipe.all
     end
   end
+
+  def add_ingredient(required_amount, product)
+    new_ingredient = self.ingredients.build(required_amount: required_amount)
+    new_ingredient.product = product
+
+    if new_ingredient.save
+      return new_ingredient
+    else
+      return nil
+    end
+  end
 end
