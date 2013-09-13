@@ -1,3 +1,4 @@
+FactoryGirl.create(:user, email: 'email@factory.com')
 unit = [ "grams", "kilograms", "liter", "milliliter", "pinch", "teaspoon"]
 num = [1,2,3,4,5,2]
 
