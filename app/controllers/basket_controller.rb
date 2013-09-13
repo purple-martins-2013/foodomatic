@@ -4,13 +4,7 @@ class BasketController < ApplicationController
     @basket = current_user.basket.list
     @grocery_list = GroceryList.new(@basket)
     @order = Order.new
-
-    @grocery_list.list.each do |product_id, amount|
-      @order.ordered_products.build(quantity: amount.ceil, product_id: product_id)
-    end
-
-    @order.total = @grocery_list.total
-    @order.user = current_user
+    @grocery_list.build_products_list(@order)
   end
 
   def add_to_basket

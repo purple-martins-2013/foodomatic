@@ -29,7 +29,7 @@
       <%= order_form.hidden_field :user_id, value: current_user.id %>
     <% end %>
       <h2 class='total-display'>Total: </h2>
-      <h2 class='total total-display'><%= number_to_currency(@order.total) %></h2>
+      <h2 class='total total-display'><%= number_to_currency(@grocery_list.total) %></h2>
       <br><br>
     <%= order_form.submit 'Buy', class: 'medium button' %>
   <% end %>
