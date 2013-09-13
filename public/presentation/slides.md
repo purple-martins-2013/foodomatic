@@ -35,9 +35,72 @@ Cooking is fun. Figuring out and getting the ingredients you need is not.
 ## The feature
 Signing in users through Facebook
 
-!SLIDE
 ## The solution
 OmniAuth with Devise
+
+!SLIDE
+## The bits:
+- What was needed from Facebook:
+
+```ruby
+  config.omniauth :facebook, ENV['FACEBOOK_ID'], ENV['FACEBOOK_SECRET'],
+                   :scope => 'email,publish_actions'
+```
+
+- Sign-up or Sign-in:
+
+```ruby
+class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  def facebook
+    user = User.from_omniauth(request.env["omniauth.auth"])
+    if user.persisted?
+      flash.notice = "Signed in!"
+      sign_in_and_redirect user
+    else
+      session["devise.user_attributes"] = user.attributes
+      redirect_to new_user_registration_url
+    end
+  end
+end
+```
+
+!SLIDE
+## User creation from Omniauth:
+
+```ruby
+  def self.from_omniauth(auth)
+    user = where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["name"]
+      user.password = Devise.friendly_token.first(16)
+      user.email = auth["info"]["email"]
+    end
+    user.save
+    user
+  end
+```
+
+```ruby
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: ""
+    t.string   "encrypted_password",     default: ""
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+  end
+```
+
 
 !SLIDE
 ## Recipe Search: Version 1

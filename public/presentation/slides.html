@@ -100,15 +100,46 @@
         <h2>The feature</h2>
         
         <p>Signing in users through Facebook</p>
+        
+        <h2>The solution</h2>
+        
+        <p>OmniAuth with Devise</p>
       </div>
       <div class='spacer bottom'></div>
     </section>
     <section class='slide'>
       <div class='spacer top'></div>
       <div class='content'>
-        <h2>The solution</h2>
+        <h2>The bits:</h2>
         
-        <p>OmniAuth with Devise</p>
+        <ul>
+        <li>What was needed from Facebook:</li>
+        </ul>
+        
+        
+        <p><textarea class='code' display='none' mode='ruby'>config.omniauth :facebook, ENV['FACEBOOK_ID'], ENV['FACEBOOK_SECRET'],&#x000A;                 :scope => 'email,publish_actions'</textarea>
+    </p>
+        
+        <ul>
+        <li>Sign-up or Sign-in:</li>
+        </ul>
+        
+        
+        <p><textarea class='code' display='none' mode='ruby'>class OmniauthCallbacksController < Devise::OmniauthCallbacksController&#x000A;  def facebook&#x000A;    user = User.from_omniauth(request.env["omniauth.auth"])&#x000A;    if user.persisted?&#x000A;      flash.notice = "Signed in!"&#x000A;      sign_in_and_redirect user&#x000A;    else&#x000A;      session["devise.user_attributes"] = user.attributes&#x000A;      redirect_to new_user_registration_url&#x000A;    end&#x000A;  end&#x000A;end</textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h2>User creation from Omniauth:</h2>
+        
+        <p><textarea class='code' display='none' mode='ruby'>def self.from_omniauth(auth)&#x000A;  user = where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|&#x000A;    user.provider = auth["provider"]&#x000A;    user.uid = auth["uid"]&#x000A;    user.name = auth["info"]["name"]&#x000A;    user.password = Devise.friendly_token.first(16)&#x000A;    user.email = auth["info"]["email"]&#x000A;  end&#x000A;  user.save&#x000A;  user&#x000A;end</textarea>
+    </p>
+        
+        <p><textarea class='code' display='none' mode='ruby'>create_table "users", force: true do |t|&#x000A;  t.string   "email",                  default: ""&#x000A;  t.string   "encrypted_password",     default: ""&#x000A;  t.string   "reset_password_token"&#x000A;  t.datetime "reset_password_sent_at"&#x000A;  t.datetime "remember_created_at"&#x000A;  t.integer  "sign_in_count",          default: 0&#x000A;  t.datetime "current_sign_in_at"&#x000A;  t.datetime "last_sign_in_at"&#x000A;  t.string   "current_sign_in_ip"&#x000A;  t.string   "last_sign_in_ip"&#x000A;  t.datetime "created_at"&#x000A;  t.datetime "updated_at"&#x000A;  t.string   "provider"&#x000A;  t.string   "uid"&#x000A;  t.string   "name"&#x000A;end</textarea>
+    </p>
       </div>
       <div class='spacer bottom'></div>
     </section>
