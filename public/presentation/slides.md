@@ -50,7 +50,7 @@ function bindAddTo(destination, badge) {
       badge.add($(this).attr('href'), recipeContainer);
     });
   }
- 
+
   function bindRemoveFrom(destination, badge) {
     $('.remove-from-' + destination).on('click', function(e) {
       e.preventDefault();
@@ -66,17 +66,17 @@ function bindAddTo(destination, badge) {
 - Make a `Badge` class
 
 !SLIDE
-### `Badge` 
+### `Badge`
 ```javascript
 function Badge(destination) {
   this.destination = destination;
   var self = this;
- 
+
   this.refresh().done(function(itemCount) {
     self.render(itemCount);
   });
 }
- 
+
 Badge.prototype.render = function(itemCount, options) {
   options = options || {}
   var $destinationLink = $('#' + this.destination + '-link');
@@ -117,9 +117,11 @@ end
 ## Refactoring Search 1
 Re-use index route instead of creating a new route and view
 ```ruby
+class RecipesController < ApplicationController
   def index
     @recipes = Recipe.search(params[:search])
   end
+end
 ```
 
 !SLIDE
@@ -141,7 +143,7 @@ class Recipe < ActiveRecord::Base
 end
 ```
 
-- Use `ILIKE` instead of `lower` and `downcase` 
+- Use `ILIKE` instead of `lower` and `downcase`
 - Accommodate multiple search terms
 - Return all recipes if no search term
 
@@ -155,7 +157,7 @@ Displaying the right buttons to manage recipes
   - index
   - basket
   - favorites
-* Different buttons depending on recipe status 
+* Different buttons depending on recipe status
 
 !SLIDE
 ### Basketed Recipe:

@@ -117,7 +117,7 @@
     <section class='slide'>
       <div class='spacer top'></div>
       <div class='content'>
-        <p><textarea class='code' display='none' mode='javascript'>function bindAddTo(destination, badge) {&#x000A;    $('.add-to-' + destination).on('click', function(e) {&#x000A;      e.preventDefault();&#x000A;      var recipeContainer = $(this).closest('.recipe-container');&#x000A;      badge.add($(this).attr('href'), recipeContainer);&#x000A;    });&#x000A;  }&#x000A; &#x000A;  function bindRemoveFrom(destination, badge) {&#x000A;    $('.remove-from-' + destination).on('click', function(e) {&#x000A;      e.preventDefault();&#x000A;      var recipeContainer = $(this).closest('.recipe-container');&#x000A;      badge.remove($(this).attr('href'), recipeContainer);&#x000A;    });&#x000A;  };</textarea>
+        <p><textarea class='code' display='none' mode='javascript'>function bindAddTo(destination, badge) {&#x000A;    $('.add-to-' + destination).on('click', function(e) {&#x000A;      e.preventDefault();&#x000A;      var recipeContainer = $(this).closest('.recipe-container');&#x000A;      badge.add($(this).attr('href'), recipeContainer);&#x000A;    });&#x000A;  }&#x000A;&#x000A;  function bindRemoveFrom(destination, badge) {&#x000A;    $('.remove-from-' + destination).on('click', function(e) {&#x000A;      e.preventDefault();&#x000A;      var recipeContainer = $(this).closest('.recipe-container');&#x000A;      badge.remove($(this).attr('href'), recipeContainer);&#x000A;    });&#x000A;  };</textarea>
     </p>
       </div>
       <div class='spacer bottom'></div>
@@ -139,7 +139,7 @@
       <div class='content'>
         <h3><code>Badge</code></h3>
         
-        <p><textarea class='code' display='none' mode='javascript'>function Badge(destination) {&#x000A;  this.destination = destination;&#x000A;  var self = this;&#x000A; &#x000A;  this.refresh().done(function(itemCount) {&#x000A;    self.render(itemCount);&#x000A;  });&#x000A;}&#x000A; &#x000A;Badge.prototype.render = function(itemCount, options) {&#x000A;  options = options || {}&#x000A;  var $destinationLink = $('#' + this.destination + '-link');&#x000A;  if (itemCount === 0) {&#x000A;    $destinationLink.find('.badger-outter').remove();&#x000A;  } else {&#x000A;    var newCount = itemCount.toString();&#x000A;    $destinationLink.badger(newCount);&#x000A;    if (options.bounce) {&#x000A;      $destinationLink&#x000A;        .stop()&#x000A;        .effect('bounce', {times: 1}, "fast");&#x000A;    }&#x000A;  }&#x000A;}</textarea>
+        <p><textarea class='code' display='none' mode='javascript'>function Badge(destination) {&#x000A;  this.destination = destination;&#x000A;  var self = this;&#x000A;&#x000A;  this.refresh().done(function(itemCount) {&#x000A;    self.render(itemCount);&#x000A;  });&#x000A;}&#x000A;&#x000A;Badge.prototype.render = function(itemCount, options) {&#x000A;  options = options || {}&#x000A;  var $destinationLink = $('#' + this.destination + '-link');&#x000A;  if (itemCount === 0) {&#x000A;    $destinationLink.find('.badger-outter').remove();&#x000A;  } else {&#x000A;    var newCount = itemCount.toString();&#x000A;    $destinationLink.badger(newCount);&#x000A;    if (options.bounce) {&#x000A;      $destinationLink&#x000A;        .stop()&#x000A;        .effect('bounce', {times: 1}, "fast");&#x000A;    }&#x000A;  }&#x000A;}</textarea>
     </p>
       </div>
       <div class='spacer bottom'></div>
@@ -178,7 +178,7 @@
         <h2>Refactoring Search 1</h2>
         
         <p>Re-use index route instead of creating a new route and view
-        <textarea class='code' display='none' mode='ruby'>def index&#x000A;  @recipes = Recipe.search(params[:search])&#x000A;end</textarea>
+        <textarea class='code' display='none' mode='ruby'>class RecipesController < ApplicationController&#x000A;  def index&#x000A;    @recipes = Recipe.search(params[:search])&#x000A;  end&#x000A;end</textarea>
     </p>
       </div>
       <div class='spacer bottom'></div>
